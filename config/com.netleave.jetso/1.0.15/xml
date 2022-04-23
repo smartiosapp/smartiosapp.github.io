@@ -1,5 +1,5 @@
 ######### Jetso config #########
-FeedPattern|http://netleave.appspot.com/static/getjetso.xml
+FeedPattern|https://smartbuyerpager.appspot.com/getjetso
 FeedIDs|123456
 ddPattern|yyyy-MM-dd HH:mm:ss.SSSSSS
 vaildingPattern|<item>
