@@ -1,120 +1,17 @@
-3:大嗚大放;https://netleave.appspot.com/118player!9
-3:總有一瓣;https://netleave.appspot.com/218player!9
-#3:粉紅小豬;https://netleave.appspot.com/318player!9
-#1: 互動新聞台;http://mytv.tvb.com/live/inews!3
-#1: 333財台;https://ewcdn13.nowe.com/session/16-5-a8bac72-2103234983888487266/Content/HLS/LIVE/Channel(HLS_CH333)/index.m3u8?token=958432bc704514681af0781e9df79ace_1616519678!1
-1: 333財台;https://ewcdn11.nowe.com/session/16-5-2e77c4f-2103234983888487266/Content/HLS/LIVE/Channel(HLS_CH333)/index.m3u8?token=6d52515d5598a6a66c89fbbf6cbd279c_1616547584!1
-1: 財電台;https://cdn.hkott.hk/hkott-live/finance/sdr/a/hls_288_NumBaseHLS_childa.m3u8!7
-1: 財經台;https://cdn.hkott.hk/hkott-live/finance/sdr/master.m3u8!7
-#1: 高清翡翠台;http://mytv.tvb.com/live/hdj!3
-#1: J2;http://mytv.tvb.com/live/j2!3
-#1: 香港;http://wap.smartone-vodafone.com/iPhone/playlist.m3u8?smeid=8&filename=HKisland&channel_id=20&ch_id=20&refer=noni&loop=1!1
-#1: 九龍;http://wap.smartone-vodafone.com/iPhone/playlist.m3u8?smeid=8&filename=Kowloon&channel_id=21&ch_id=20&refer=noni&loop=1!1
-#1: 新界;http://wap.smartone-vodafone.com/iPhone/playlist.m3u8?smeid=8&filename=TuenMun&channel_id=23&ch_id=20&refer=noni&loop=1!1
-1: 香港;https://smartioschannel.appspot.com/gethksnap!2
-1: 九龍;https://smartioschannel.appspot.com/getklsnap!2
-1: 新界;https://smartioschannel.appspot.com/gettwsnap!2
-#1: BloombergTV;http://live.bltvios.com.edgesuite.net/btvplus/master.m3u8!1
-1: BloombergTV;https://www.bloomberg.com/media-manifest/streams/us.m3u8!1
-1:Yan;https://b-hls-04.doppiocdn.com/hls/73511307/master/73511307_auto.m3u8!1
-1:MissLee;https://b-hls-09.doppiocdn.com/hls/66381873/master/66381873.m3u8!1
-1:Nina;https://b-hls-09.doppiocdn.com/hls/78013992/master/78013992.m3u8!1
-#2:  翡翠台;http://token.tvb.com/stream/live/hls/mobilehd_jade.smil!1
-#2:  翡翠台;https://netleave.appspot.com/hdjplayer!1
 2:  76台;https://hoytv-live-stream.hoy.tv/ch76/index-fhd.m3u8!1
 2:  77台;https://hoytv-live-stream.hoy.tv/ch77/index-fhd.m3u8!1
 2:  78台;https://hoytv-live-stream.hoy.tv/ch78/index-fhd.m3u8!1
 2:  有線財經電台;http://netleave.appspot.com/cableFInewsplayer!1
 2: now 財經台;https://netleave.appspot.com/333player!2
-2:  77台;http://media.fantv.hk/m3u8/archive/channel2.m3u8!1
-#2: 互動新聞台;http://token.tvb.com/stream/live/hls/mobile_inews.smil?app=news!1
-#2: 互動新聞台;http://pull.a8.com/live/tvinews/playlist.m3u8!1
-#2: 互動新聞台;https://netleave.appspot.com/inewsplayer!1
-#2: event;http://stream.qtv.apple.com/events/oct/1210pibasdfvoihbadsv/12poibnasfdvpiajbafvpihjbasfvpiubfsv10_iphone_vod_ref.mov!1
-#2: 請評分;itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=397445604!0
-#2: event;http://stream.qtv.apple.com/events/mar/123pibhargjknawdconwecown/12oihbqeorvfhbpiubqnfv3_iphone_vod_ref.mov!1
-#2: event;http://stream.qtv.apple.com/events/jun/126pihbedvcoihbefvbhjkbvsefbg/12oibwefsvihbsdfvpihbsd6_iphone_vod_ref.mov!1
-#2: event2;http://itstreaming.apple.com/podcasts/apple_keynotes/20_march_2012_ipod.m4v!1
-#2:CCTV新聞;http://202.108.16.135/live/cctv/cctv_xinwen/index.m3u8
-#2: CCTV新聞 ;http://t.live.cntv.cn/m3u8/cctv-news.m3u8!1
-#2: CCTV新聞 ;http://hls15.cntv.chinacache.net/cache/5_/seg0/index.m3u8!1
-#2: CCTV新聞 ;http://ak.live.cntv.cn/i/cctv13_1@101095/master.m3u8?b=100-300!1
-#2: CCTV新聞 ;http://live.3gv.ifeng.com/live/CCTV13.m3u8!1
-#2: CCTV新聞 ;http://zv.3gv.ifeng.com/cctv13.m3u8!1
-#2: CCTV新聞 ;http://cctv13.vtime.cntv.cloudcdn.net:8500/cache/24_/seg0/index.m3u8!1
-#2: CCTV新聞 ;http://r.gslb.lecloud.com/live/hls/201706223000000c699/desc.m3u8!1
-#2: CCTV新聞 ;http://huaweicdn.hb.chinamobile.com/PLTV/88888890/224/3221225525/index.m3u8!1
-#2: CCTV新聞 ;http://223.110.243.152/PLTV/4/224/3221227387/1.m3u8!1
-#2: CCTV新聞 ;https://netleave.appspot.com/inewsplayer!1
 2: CCTV新聞 ;https://netleave.appspot.com/cctv13player!1
-#2:CCTV新聞;http://202.108.16.134/live/cctv/cctv_xinwen/index.m3u8!1
-#2:CCTV新聞;http://l.m.cztv.com:554/live/cctv13/playlist.m3u8!1
-#2:CCTV新聞;http://112.231.23.20:554/rtplive/tv13/playlist.m3u8!1
-#2:CCTV新聞;http://big5.cctv.com/gate/big5/t.live.cntv.cn/m3u8/cctv-news.m3u8!1
-#2: 香港⑨宮直播;https://netleave.appspot.com/cam16player!1
 2: 香港⑨宮直播;https://netleave.appspot.com/cam16player!1
-#2:⚽ 央視足球 ;http://tvm.3g.cntv.cn/approve/live?type=ipad&channel= CCTVFYZQ!1
-#2:CCTV5 ;http://t.live.cntv.cn/m3u8/cctv-5.m3u8!1
-#2:CCTV5 ;http://202.108.16.135/live/cctv/cctv_5/index.m3u8!1
-#2:CCTV5 ;http://202.108.16.134/live/cctv/cctv_5/index.m3u8!1
-#2:⚽ CCTV5 ;http://l.m.cztv.com:554/live/cctv5/playlist.m3u8!1
-#2:⚽ CCTV5 ;http://tvm.3g.cntv.cn/approve/live?type=ipad&channel=CCTV5!1
-#2:⚽ CCTV5 ;http://ipadlive.cntv.soooner.com/cctv_p2p_hdcctv5.m3u8!1
-#2:⚽ CCTV5 ;http://121.199.63.236:7613/m3u8/ccws1/cctv5.m3u8?from=bab&fun=yes&chk=y&chunk=xax&pwd=yuntutv&a=b!1
-#2:⚽ CCTV5 ;http://106.38.213.8/tslive/c13_ts_cctv5HD_t10/c13_ts_cctv5HD_t10.m3u8!1
-#2:⚽ CCTV5 ;http://m3u8.live.video.qiyi.com/tslive/c13_ts_cctv5HD_t10/c13_ts_cctv5HD_t10.m3u8?pv=0.2!1
-#2:⚽ CCTV5 ;http://cctv5.vtime.cntv.cloudcdn.net:8500/cache/212_/seg0/index.m3u8!1
-#2:⚽ CCTV5 ;http://202.195.240.8/hls/cctv5hd.m3u8!1
-#2:⚽ CCTV5 ;http://223.110.243.155/PLTV/2510088/224/3221227202/1.m3u8!1
-#2:⚽ CCTV5 ;http://huaweicdn.hb.chinamobile.com/PLTV/2510088/224/3221225800/1.m3u8!1
-#2:⚽ CCTV5 ;http://39.135.32.28:6610/000000001000/reallive-cctv5/1.m3u8?IASHttpSessionId=OTT!1
 2:⚽ CCTV5 ;https://netleave.appspot.com/cctv5player!1
-#2:CCTV5 ;http://big5.cctv.com/gate/big5/t.live.cntv.cn/m3u8/cctv-5.m3u8!1
-#2:FashionTV;http://fash1043.cloudycdn.services/slive/_definst_/ftv_ftv_midnite_k1y_27049_midnite_secr_108_hls.smil/playlist.m3u8!1
-#2:廣東體育 ;http://58.248.254.10/share/share/jshd/tv/gdgg/gdgg.m3u8!1
-#2:⚽ 廣東體育 ;http://58.248.254.6/share1/jshd/tv/gdgg/gdgg.m3u8!1
-#2:⚽ 廣東體育 ;http://113.108.220.53:1935/live/gdty.sdp/playlist.m3u8!1
-#2:⚽ 廣東體育 ;http://tvm.3g.cntv.cn/approve/live?type=ipad&channel=GDSport!1
-#2:⚽ 廣東體育 ;http://58.248.254.11:1935/live/gdty-i.stream/playlist.m3u8!1
-#2:⚽ 廣東體育 ;http://58.248.254.11/tvlive/gdty-h.stream/playlist.m3u8!1
-#2:⚽ 廣東體育 ;http://httplive.gdtv.cn:1935/live/sport/playlist.m3u8!1
-#2:⚽ 廣東體育 ;http://119.84.34.236/live/hls/201612083000002ht99/desc.m3u8!1
-#2:⚽ 廣東體育 ;http://s-423975.gotocdn.com:6330/v/gdty.php!1
-#2:⚽ 廣東體育 ;http://nclive.grtn.cn/typd/sd/live.m3u8!1
 2:⚽ 廣東體育 ;http://e59abdd420c65d43cc1550d493a88c71.v.smtcdns.net/4403-tx.otvstream.otvcloud.com/otv/skcc/live/channel34/2300.m3u8!1
-#2: 壹電視;http://iphonestreamak.nexttv.com.tw/iphone/wifistream.m3u8!1
-#2:NHKワールド 🇯🇵;http://plslive-w.nhk.or.jp/nhkworld/app/live.m3u8!1
-#2:NHKワールド 🇯🇵;http://plslive-w.nhk.or.jp/nhkworld/app-mainp/live.m3u8!1
-#2:NHKワールド 🇯🇵;http://web-cache.stream.ne.jp/www11/nhkworld-tv/global/222714/live.m3u8!1
-#2:NHKワールド 🇯🇵;https://nhkworld.webcdn.stream.ne.jp/www11/nhkworld-tv/global/263941/live_stv_s.m3u8!1
 2:NHKワールド 🇯🇵;https://nhkworld.webcdn.stream.ne.jp/www11/nhkworld-tv/global/2003458/live.m3u8!1
-#2: 互動新聞台;http://live1.ms.tvb.com/tvb/tv/inews/022.m3u8!1
-#2: 互動新聞台;http://e1.vdowowza.vip.hk1.tvb.com/tvblive/smil:mobile_inews.smil/playlist.m3u8!1
-#2: 互動新聞台;http://e1.vdowowza.vip.hk1.tvb.com/tvblive/smil:mobile_inews.smil/chunklist-b224000.m3u8?wowzasessionid=402749512!1
-#2: 互動新聞台;http://token.tvb.com/stream/live/hls/mobile_inews.smil?app=news!1
-#2: 互動新聞台;https://netleave.appspot.com/inewsplayer!1
-#2: 壹電視;http://d2e6xlgy8sg8ji.cloudfront.net/liveedge/eratv3/chunklist.m3u8!1
 2: 壹電視;http://stream.nexttv.com.tw/n001/hd/live.m3u8!1
-#2: now 新聞台;http://teslagram.com/now_proxy.php?channel=2!1
 2: now 新聞台;https://www.navchina.cf/IPTV/now.php?id=332!1
 2:  有線財經台（音）;http://gslb.cdn.hk.chinamobile.com/live/a647b52dca1e499d958e68f649ad8c2c/5d009ed72fd3424a8a86a2dbb4b7fe59.m3u8!1
 2: now 財經台（音）;https://netleave.appspot.com/333aplayer!2
-#2: event;http://stream.qtv.apple.com/events/mar/123pibhargjknawdconwecown/12oihbqeorvfhbpiubqnfv3_iphone_vod_ref.mov!1
-#2: event;http://stream.qtv.apple.com/events/jun/126pihbedvcoihbefvbhjkbvsefbg/12oibwefsvihbsdfvpihbsd6_iphone_vod_ref.mov!1
-3: 姊妹淘2 ;http://mytv.tvb.com/variety/allthingsgirl2/
-3:兄弟幫 🎩;http://mytv.tvb.com/variety/bigboysclub/
-#3:超級巨聲3;http://mytv.tvb.com/variety/thevoice3/
-#3: 巨聲工房 ;http://mytv.tvb.com/variety/thesession/
-3:🎤 M-Café 🎶;http://mytv.tvb.com/music/musiccafe/
-3:🏠 安樂蝸;http://mytv.tvb.com/lifestyle/ownsweethome/
-3:💣 玩嘢王;http://mytv.tvb.com/variety/officeofpracticaljokes/
-3:😂 超級無敵獎門人;http://mytv.tvb.com/others/supertriomaximus/
-3:新聞透視;http://mytv.tvb.com/news/newsmagazine/
-3:星期日檔案;http://mytv.tvb.com/news/sundayreport/
-3:財經透視;http://mytv.tvb.com/news/financemagazine/
-3:講清講楚 🔫;http://mytv.tvb.com/news/ontherecord/
-3:六點半新聞報道;http://mytv.tvb.com/news/newsat630/
-3:晚間新聞;http://mytv.tvb.com/news/newsroundup/
 LiveSource|http://smartstatic.appspot.com/phone
 #TVBLive|互動新聞台;創富坊;高清翡翠台;J2
 TVBLive|互動新聞台;創富坊
