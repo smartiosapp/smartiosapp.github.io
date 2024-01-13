@@ -7,7 +7,7 @@ var Template = function() { return `<?xml version="1.0" encoding="UTF-8" ?>
       <list> 
         <section> 
 				  <listItemLockup> 
-				    <title>香港直播頻道 new</title>
+				    <title>香港直播頻道</title>
 			            //1. add from here
 				    <relatedContent> 
 				      <grid>
