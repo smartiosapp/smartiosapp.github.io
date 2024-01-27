@@ -124,10 +124,10 @@ var Template = function() { return `<?xml version="1.0" encoding="UTF-8" ?>
 	<lockup videoURL="https://liveprodusphoenixeast.akamaized.net/USPhx-HD/Channel-TX-USPhx-AWS-virginia-1/Source-USPhx-16k-1-s6lk2-BP-07-02-81ykIWnsMsg_live.m3u8">
 	<img src="${this.BASEURL}images/bloomberg.png" width="930" height="308" />
 	</lockup>
-	<lockup videoURL="https://hoytv-live-stream.hoy.tv/ch76/index-fhd.m3u8">
+	<lockup poTitle="【經濟新聞】" prdeoURL="https://netleave.appspot.com/utubeplayer?ch=UCVZTkv6LM-_xWUM9t-jS5JA,UCjZL1_t_U0zfIwHKyWY8NTw,UC-nf2NPnA3RXOZcw0KBmGfA,UCETuQf4lzTrfevoHdSGo8Ew,UCBbTnorwzva0ZIMGW0ttwVA">
 	<img src="${this.BASEURL}images/finewCable.png" width="500" height="308" />
 	</lockup>
-	<lockup iedeoURL="http://netleave.appspot.com/cablentnewsplayer">
+	<lockup videoURL="https://hoytv-live-stream.hoy.tv/ch76/index-fhd.m3u8">
 	<img src="${this.BASEURL}images/TVBent.png" width="500" height="308" />
 	</lockup>
 	<lockup videoURL="https://www.rthk.hk/feeds/dtt/rthktv31_https.m3u8">
@@ -145,7 +145,7 @@ var Template = function() { return `<?xml version="1.0" encoding="UTF-8" ?>
 	<lockup uideoURL="https://netleave.appspot.com/utubeplayer?ch=PLDQ1DoSV23dNZcVClXwffw8bEJUF_ESvz" uiTitle="【潮玩科技】">
 	<img src="${this.BASEURL}images/playtech.png" width="930" height="308" />
 	</lockup>
-	<lockup poTitle="【潮玩科技】" prdeoURL="https://netleave.appspot.com/utubeplayer?ch=UCNAqBC6Z1HkymQ7gkG0pCOg,UCnixWoic7ATGI0AZ2LrtJ7Q,UCrZG5sGryxwgSDQSlHgmZTw,UCm5oNp5xqr4CdtU9L7ZrsKg,UCqhS6bcbMX5AtiM9dedFiYQ,UC8u_Mgs-48ZdtP67b4CYfewi">
+	<lockup poTitle="【科技新聞】" prdeoURL="https://netleave.appspot.com/utubeplayer?ch=UCNAqBC6Z1HkymQ7gkG0pCOg,UCnixWoic7ATGI0AZ2LrtJ7Q,UCrZG5sGryxwgSDQSlHgmZTw,UCm5oNp5xqr4CdtU9L7ZrsKg,UCqhS6bcbMX5AtiM9dedFiYQ,UC8u_Mgs-48ZdtP67b4CYfewi,UCZXZcgbA7iajsWdPsAzJ40A">
 	<img src="${this.BASEURL}images/playtech.png" width="930" height="308" />
 	</lockup>
 	<lockup updeoURL="https://netleave.appspot.com/CS118player" uiTitle="【大嗚大放】">
