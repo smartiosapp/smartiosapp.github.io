@@ -7,7 +7,7 @@ var Template = function() { return `<?xml version="1.0" encoding="UTF-8" ?>
 	<menuBar>
 	<section>
 	<menuItem nedeoURL="https://netleave.appspot.com/332">
-	<title>NOW</title>
+	<title>NOW332</title>
 	</menuItem>
 	<menuItem videoURL="https://netleave.appspot.com/cablenewsplayer">
 	<title>CABLE</title>
