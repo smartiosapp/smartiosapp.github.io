@@ -15,10 +15,10 @@ var Template = function() { return `<?xml version="1.0" encoding="UTF-8" ?>
 	<menuItem videoURL="https://netleave.appspot.com/cctv13player">
 	<title>CCTV</title>
 	</menuItem>
-	<menuItem wedeoURL="https://netleave.appspot.com/mirror">
+	<menuItem videoURL="https://raw.githubusercontent.com/hearofnight/HonYou2BeLive/main/newchannels/mnewstw.m3u8">
 	<title>MIRROR</title>
 	</menuItem>
-	<menuItem wedeoURL="https://netleave.appspot.com/ebc2019player">
+	<menuItem videoURL="https://raw.githubusercontent.com/hearofnight/HonYou2BeLive/main/newchannels/EbcNews.m3u8">
 	<title>EBC</title>
 	</menuItem>
 	<menuItem videoURL="https://cdn.nhkworld.jp/www11/nhkworld-tv/domestic/2003459/live.m3u8">
