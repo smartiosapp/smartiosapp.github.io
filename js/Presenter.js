@@ -135,7 +135,7 @@ var Presenter = {
 //                console.log("TT: ["+item[i].title+"]");
                 var mediaItem;
 //                        console.log("URL: ["+item[i].url+"]");
-                mediaItem = new MediaItem("video", "https://inv.riverside.rocks/latest_version?id="+item.videoId+"&itag=22");
+                mediaItem = new MediaItem("video", "https://inv.riverside.rocks/latest_version?id="+item.videoId+"&itag=18");
 //                        mediaItem.artworkImageURL = item.mediaGroup[i].smallPath;
 //                mediaItem.artworkImageURL = `${resourceLoader.BASEURL}images/moovnewsthumbnail.png`;
                 mediaItem.artworkImageURL = item.videoThumbnails[4].url.replace(':3000', '');
@@ -175,7 +175,7 @@ var Presenter = {
 //            mediaItem = new MediaItem("video", "https://yewtu.be/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=22");
 //            mediaItem = new MediaItem("video", "https://iv.ggtyler.dev/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=22");
 //            mediaItem = new MediaItem("video", "https://iv.melmac.space/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=22");
-            mediaItem = new MediaItem("video", "https://invidious.perennialte.ch/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=22");
+            mediaItem = new MediaItem("video", "https://invidious.perennialte.ch/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
 //                mediaItem.artworkImageURL = item.thumbnail;
             mediaItem.artworkImageURL = 'https://i.ytimg.com/vi/'+item.url.replace('/watch?v=', '')+'/mqdefault.jpg';
                 mediaItem.title = 'VIDEO [ '+(idx + 1)+' / '+Math.min(itemsArray.length,MAXITEMSTORE)+' ]';
