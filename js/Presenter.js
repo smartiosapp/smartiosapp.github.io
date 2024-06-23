@@ -2021,6 +2021,7 @@ o.drmToken = viutoken;
 
                 var cyParam = getParameterByName('ch', uideoURL);
                 var numberParam = getParameterByName('no', uideoURL);
+                cyParam.replace("PLrB86vfeOe3ZbFejGBKLlebcj0SKwhgFG", "PL3V8J3zzkEXJopIwGSE49pKMwoaCxJ6z4");
                 console.log("ch="+cyParam);
                 console.log("no="+numberParam);
                 
