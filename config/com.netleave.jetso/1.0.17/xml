@@ -1,7 +1,8 @@
 ######### Jetso config #########
 #FeedPattern|https://smartbuyerpager.appspot.com/getjetso
 #FeedPattern|https://smartiosapp.github.io/config/com.netleave.jetso/1.0.17/getjetso.xml
-FeedPattern|https://raw.githubusercontent.com/smartiosapp/smartiosapp.github.io/main/config/com.netleave.jetso/1.0.17/getjetso.xml
+#FeedPattern|https://raw.githubusercontent.com/smartiosapp/smartiosapp.github.io/main/config/com.netleave.jetso/1.0.17/getjetso.xml
+FeedPattern|https://netleave.appspot.com/static/getjetso.xml
 FeedIDs|123456
 ddPattern|yyyy-MM-dd HH:mm:ss.SSSSSS
 vaildingPattern|<item>
