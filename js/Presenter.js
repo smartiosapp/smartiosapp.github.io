@@ -135,7 +135,7 @@ var Presenter = {
 //                console.log("TT: ["+item[i].title+"]");
                 var mediaItem;
 //                        console.log("URL: ["+item[i].url+"]");
-                mediaItem = new MediaItem("video", "https://inv.riverside.rocks/latest_version?id="+item.videoId+"&itag=22");
+                mediaItem = new MediaItem("video", "https://inv.riverside.rocks/latest_version?id="+item.videoId+"&itag=18");
 //                        mediaItem.artworkImageURL = item.mediaGroup[i].smallPath;
 //                mediaItem.artworkImageURL = `${resourceLoader.BASEURL}images/moovnewsthumbnail.png`;
                 mediaItem.artworkImageURL = item.videoThumbnails[4].url.replace(':3000', '');
@@ -174,7 +174,8 @@ var Presenter = {
 //            mediaItem = new MediaItem("video", "https://yt.oelrichsgarcia.de/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=22");
 //            mediaItem = new MediaItem("video", "https://yewtu.be/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=22");
 //            mediaItem = new MediaItem("video", "https://iv.ggtyler.dev/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=22");
-            mediaItem = new MediaItem("video", "https://iv.melmac.space/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=22");
+//            mediaItem = new MediaItem("video", "https://iv.melmac.space/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=22");
+            mediaItem = new MediaItem("video", "https://invidious.perennialte.ch/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
 //                mediaItem.artworkImageURL = item.thumbnail;
             mediaItem.artworkImageURL = 'https://i.ytimg.com/vi/'+item.url.replace('/watch?v=', '')+'/mqdefault.jpg';
                 mediaItem.title = 'VIDEO [ '+(idx + 1)+' / '+Math.min(itemsArray.length,MAXITEMSTORE)+' ]';
@@ -1793,7 +1794,8 @@ o.drmToken = viutoken;
 //            podeoURL = 'https://inv.riverside.rocks/api/v1/playlists/'+cyParam
 //            podeoURL = 'https://pipedapi.tokhmi.xyz/playlists/'+cyParam
 //            podeoURL = 'https://pipedapi.kavin.rocks/playlists/'+cyParam
-            podeoURL = 'https://piped-api.lunar.icu/playlists/'+cyParam
+//            podeoURL = 'https://piped-api.lunar.icu/playlists/'+cyParam
+            podeoURL = 'https://pipedapi.adminforge.de/playlists/'+cyParam
 //            podeoURL = 'https://pipedapi.osphost.fi/playlists/'+cyParam
 //            podeoURL = 'https://api.piped.projectsegfau.lt/playlists/'+cyParam
             console.log("podeoURL: "+podeoURL);
@@ -1914,7 +1916,8 @@ o.drmToken = viutoken;
 //            podeoURL = 'https://inv.riverside.rocks/api/v1/playlists/'+cyParam
 //            prdeoURL = 'https://pipedapi.tokhmi.xyz/channel/'+cyParam
 //            prdeoURL = 'https://api-piped.mha.fi/channel/'+cyParam
-            prdeoURL = 'https://piped-api.garudalinux.org/channel/'+cyParam
+//            prdeoURL = 'https://piped-api.garudalinux.org/channel/'+cyParam
+            prdeoURL = 'https://pipedapi.drgns.space/channel/'+cyParam
             console.log("prdeoURL: "+prdeoURL);
 
             var xhr = new XMLHttpRequest();
@@ -2018,6 +2021,7 @@ o.drmToken = viutoken;
 
                 var cyParam = getParameterByName('ch', uideoURL);
                 var numberParam = getParameterByName('no', uideoURL);
+                cyParam = cyParam.replace("PLrB86vfeOe3ZbFejGBKLlebcj0SKwhgFG", "PL3V8J3zzkEXJopIwGSE49pKMwoaCxJ6z4");
                 console.log("ch="+cyParam);
                 console.log("no="+numberParam);
                 
