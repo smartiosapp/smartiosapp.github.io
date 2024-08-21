@@ -1,7 +1,0 @@
-######### Traffic News config #########
-FeedPattern|https://smartbuyerpager.appspot.com/getTrafficNews
-FeedIDs|123456
-ddPattern|yyyy-MM-dd HH:mm:ss.SSSSSS
-vaildingPattern|<item>
-vaigPattern|<item>
-ssPattern|(http://((bit.ly)||(fb.me))/\w+)
