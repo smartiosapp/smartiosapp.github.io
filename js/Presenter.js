@@ -175,8 +175,8 @@ var Presenter = {
 //            mediaItem = new MediaItem("video", "https://yewtu.be/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=22");
 //            mediaItem = new MediaItem("video", "https://iv.ggtyler.dev/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=22");
 //            mediaItem = new MediaItem("video", "https://iv.melmac.space/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=22");
-            mediaItem = new MediaItem("video", "https://invidious.perennialte.ch/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
-//                mediaItem.artworkImageURL = item.thumbnail;
+//            mediaItem = new MediaItem("video", "https://invidious.perennialte.ch/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
+            mediaItem = new MediaItem("video", "https://invidious.nerdvpn.de/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");//                mediaItem.artworkImageURL = item.thumbnail;
             mediaItem.artworkImageURL = 'https://i.ytimg.com/vi/'+item.url.replace('/watch?v=', '')+'/mqdefault.jpg';
                 mediaItem.title = 'VIDEO [ '+(idx + 1)+' / '+Math.min(itemsArray.length,MAXITEMSTORE)+' ]';
                 mediaItem.description = item.title;
@@ -1788,6 +1788,8 @@ o.drmToken = viutoken;
             navigationDocument.presentModal(AJAXtemplate);
             
             var cyParam = getParameterByName('ch', podeoURL);
+            cyParam = cyParam.replace("PLPY0_ooDN1dt-B9om-dPyZ5F7xdDXHmPk", "PLPY0_ooDN1dswSMK8akjVipmqYFvAjXBq");
+
             console.log("ch="+cyParam);
             
             if(cyParam) {
@@ -2021,7 +2023,7 @@ o.drmToken = viutoken;
 
                 var cyParam = getParameterByName('ch', uideoURL);
                 var numberParam = getParameterByName('no', uideoURL);
-                cyParam = cyParam.replace("PLrB86vfeOe3ZbFejGBKLlebcj0SKwhgFG", "PL3V8J3zzkEXJopIwGSE49pKMwoaCxJ6z4");
+//                cyParam = cyParam.replace("PLrB86vfeOe3ZbFejGBKLlebcj0SKwhgFG", "PL3V8J3zzkEXJopIwGSE49pKMwoaCxJ6z4");
                 console.log("ch="+cyParam);
                 console.log("no="+numberParam);
                 
