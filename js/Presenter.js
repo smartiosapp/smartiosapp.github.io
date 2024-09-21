@@ -176,7 +176,9 @@ var Presenter = {
 //            mediaItem = new MediaItem("video", "https://iv.ggtyler.dev/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=22");
 //            mediaItem = new MediaItem("video", "https://iv.melmac.space/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=22");
 //            mediaItem = new MediaItem("video", "https://invidious.perennialte.ch/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
-            mediaItem = new MediaItem("video", "https://invidious.nerdvpn.de/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");//                mediaItem.artworkImageURL = item.thumbnail;
+//            mediaItem = new MediaItem("video", "https://invidious.nerdvpn.de/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
+            mediaItem = new MediaItem("video", "https://cal1.iv.ggtyler.dev/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
+//            mediaItem.artworkImageURL = item.thumbnail;
             mediaItem.artworkImageURL = 'https://i.ytimg.com/vi/'+item.url.replace('/watch?v=', '')+'/mqdefault.jpg';
                 mediaItem.title = 'VIDEO [ '+(idx + 1)+' / '+Math.min(itemsArray.length,MAXITEMSTORE)+' ]';
                 mediaItem.description = item.title;
