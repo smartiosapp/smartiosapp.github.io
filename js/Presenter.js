@@ -656,9 +656,9 @@ var Presenter = {
 			console.log("FIRE:["+uPageURL+"](GET)");
 			var xhrUT = new XMLHttpRequest();
 			xhrUT.open("GET", uPageURL);
-			xhrUT.setRequestHeader('origin', 'https://piped.lunar.icu');
-			xhrUT.setRequestHeader('User-Agent', 'Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25');
-			xhrUT.setRequestHeader('referer', 'https://piped.lunar.icu/');
+//			xhrUT.setRequestHeader('origin', 'https://piped.lunar.icu');
+			xhrUT.setRequestHeader('User-Agent', 'Yattee/174 CFNetwork/1390 Darwin/22.0.0');
+//			xhrUT.setRequestHeader('referer', 'https://piped.lunar.icu/');
 			xhrUT.onreadystatechange = function () {
 				if (this.readyState == 4 && this.status == 200) {
 //                    console.log("output: ["+xhrUT.responseText+"]");
