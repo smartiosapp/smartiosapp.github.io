@@ -564,7 +564,8 @@ var Presenter = {
 //            myParamURL = 'https://api-piped.shimul.me/streams/'+mvParam;
 //            myParamURL = 'https://pipedapi.kavin.rocks/streams/'+mvParam;
 //            myParamURL = 'https://pipedapi.aeong.one/streams/'+mvParam;
-            myParamURL = 'https://api.piped.privacydev.net/streams/'+mvParam;
+//            myParamURL = 'https://api.piped.privacydev.net/streams/'+mvParam;
+            myParamURL = 'https://pipedapi.wireway.ch/streams/'+mvParam;
             console.log("FIRE:["+myParamURL+"](GET)");
             var xhr = new XMLHttpRequest();
             xhr.open("GET", myParamURL);
@@ -1559,7 +1560,8 @@ o.drmToken = viutoken;
 //                                goUT("https://api-piped.shimul.me/streams/"+weParam, xhr.responseText);
 //                                goUT("https://pipedapi.kavin.rocks/streams/"+weParam, xhr.responseText);
 //                                goUT("https://pipedapi.aeong.one/streams/"+weParam, xhr.responseText);
-                                goUT("https://api.piped.privacydev.net/streams/"+weParam, xhr.responseText);
+//                                goUT("https://api.piped.privacydev.net/streams/"+weParam, xhr.responseText);
+                                goUT("https://pipedapi.wireway.ch/streams/"+weParam, xhr.responseText);
                             }
                             //                            goUTTV(xhr.responseText.replace('m.youtube.com/watch', 'www.youtube.com/appletv/watch'));
                             /*
@@ -1983,7 +1985,8 @@ o.drmToken = viutoken;
 //                    goUT("https://api-piped.shimul.me/streams/"+myParam, uideoURL);
 //                    goUT("https://pipedapi.kavin.rocks/streams/"+myParam, uideoURL);
 //                    goUT("https://pipedapi.aeong.one/streams/"+myParam, uideoURL);
-                    goUT("https://api.piped.privacydev.net/streams/"+myParam, uideoURL);
+//                    goUT("https://api.piped.privacydev.net/streams/"+myParam, uideoURL);
+                    goUT("https://pipedapi.wireway.ch/streams/"+myParam, uideoURL);
 //                    goIn2AppUT("https://m.youtube.com/watch?v="+myParam, uideoURL, uideoTT);
 //                    goUTTV("https://www.youtube.com/appletv/watch?v="+myParam);
 /*
