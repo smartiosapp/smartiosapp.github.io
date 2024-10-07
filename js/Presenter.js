@@ -1801,7 +1801,6 @@ o.drmToken = viutoken;
             var cyParam = getParameterByName('ch', podeoURL);
             cyParam = cyParam.replace("PLPY0_ooDN1dt-B9om-dPyZ5F7xdDXHmPk", "PLPY0_ooDN1dswSMK8akjVipmqYFvAjXBq");
             cyParam = cyParam.replace("PLzrFT7CrcDKzqJjFo5a4OVmUbW-Iv_g4W", "PLzrFT7CrcDKzdQ1hSVT5LFdMDpRvip3by");
-            [Log] podeoURL: https://pipedapi.adminforge.de/playlists/ (Presenter.js, line 1814)
 
             console.log("ch="+cyParam);
             
