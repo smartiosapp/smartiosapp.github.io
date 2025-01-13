@@ -1983,8 +1983,11 @@ o.drmToken = viutoken;
             if(getDomain(uideoURL, true)=="netleave.appspot.com") {
          
                 var myParam = getParameterByName('mv', uideoURL);
+
+                myParam = myParam.replace("DOPEzhk8u28", "4Ck5f_GUn2w");
+
                 console.log("mv="+myParam);
-                
+
                 if(myParam) {
                     var resultsemail = "...";
                     var loadingTemplate = '<document><loadingTemplate><activityIndicator><text>Loading'+resultsemail+'</text></activityIndicator></loadingTemplate></document>';
