@@ -179,7 +179,8 @@ var Presenter = {
 //            mediaItem = new MediaItem("video", "https://invidious.nerdvpn.de/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
             if (idx % 3 === 1) {
 //                mediaItem = new MediaItem("video", "https://tube.kuylar.dev/proxy/media/"+item.url.replace('/watch?v=', '')+".m3u8");
-                mediaItem = new MediaItem("video", "https://pol1.iv.ggtyler.dev/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
+//                mediaItem = new MediaItem("video", "https://pol1.iv.ggtyler.dev/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
+                mediaItem = new MediaItem("video", "https://invidious.f5.si/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
             } else if (idx % 3 === 0) {
                 mediaItem = new MediaItem("video", "https://cal1.iv.ggtyler.dev/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
             } else {
