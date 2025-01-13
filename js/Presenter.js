@@ -184,7 +184,8 @@ var Presenter = {
             } else if (idx % 3 === 0) {
                 mediaItem = new MediaItem("video", "https://cal1.iv.ggtyler.dev/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
             } else {
-                mediaItem = new MediaItem("video", "https://inv.nadeko.net/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
+//                mediaItem = new MediaItem("video", "https://inv.nadeko.net/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
+                mediaItem = new MediaItem("video", "https://inv.ngn.tf/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
             }
 //            mediaItem = new MediaItem("video", "https://cal1.iv.ggtyler.dev/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
 //            mediaItem.artworkImageURL = item.thumbnail;
