@@ -1946,7 +1946,7 @@ o.drmToken = viutoken;
                 if (this.readyState == 4 && this.status == 200) {
 //                    console.log("output: ["+xhr.responseText+"]");
                     console.log("getU[IV] callback okay!!!");
-                    navigationDocument.dismissModal();
+//                    navigationDocument.dismissModal();
 
                     obj = JSON.parse(xhr.responseText);
 //                    console.log("result: ["+obj.title+"]");
@@ -1970,6 +1970,7 @@ o.drmToken = viutoken;
             all_items.forEach(addInvidious, playlist);
             player.playlist = playlist;
             console.log("Playlist items: " + player.playlist.length);
+            navigationDocument.dismissModal();
 
             if (player.playlist.length>0) {
                 player.play();
