@@ -1987,9 +1987,12 @@ o.drmToken = viutoken;
          
                 var myParam = getParameterByName('mv', uideoURL);
 
-                myParam = myParam.replace("DOPEzhk8u28", "4Ck5f_GUn2w");
-
-                console.log("mv="+myParam);
+                if (myParam) {
+                    myParam = myParam.replace("DOPEzhk8u28", "4Ck5f_GUn2w");
+                    console.log("mv="+myParam);
+                } else {
+                    console.log("Parameter 'myParam' is null or undefined.");
+                }
 
                 if(myParam) {
                     var resultsemail = "...";
