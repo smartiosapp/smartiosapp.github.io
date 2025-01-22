@@ -850,6 +850,15 @@ var Presenter = {
         rtdeoURL = ele.getAttribute("rtdeoURL")
         if(rtdeoURL) {
             var xlParam = getParameterByName('xl', rtdeoURL);
+            
+            xlParam = xlParam.replace("9444", "11552");
+            xlParam = xlParam.replace("866", "11507");
+            xlParam = xlParam.replace("9710", "11526");
+            xlParam = xlParam.replace("9593", "11452");
+            xlParam = xlParam.replace("9866", "11199");
+            xlParam = xlParam.replace("9427", "9713");
+
+
             console.log("xl="+xlParam);
 
             rtdeoURL = genRTLink1(xlParam);
