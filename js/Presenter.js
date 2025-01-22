@@ -2047,10 +2047,15 @@ o.drmToken = viutoken;
 
                 var cyParam = getParameterByName('ch', uideoURL);
                 var numberParam = getParameterByName('no', uideoURL);
-                cyParam = cyParam.replace("PLrB86vfeOe3ZbFejGBKLlebcj0SKwhgFG", "PLDvDiLKUHy2NK3mZN5vwyW2lvM00CkLwc");
-                console.log("ch="+cyParam);
-                console.log("no="+numberParam);
                 
+                if (cyParam) {
+                    cyParam = cyParam.replace("PLrB86vfeOe3ZbFejGBKLlebcj0SKwhgFG", "PLDvDiLKUHy2NK3mZN5vwyW2lvM00CkLwc");
+                    console.log("ch="+cyParam);
+                    console.log("no="+numberParam);
+                } else {
+                    console.log("Parameter 'cyParam' is null or undefined.");
+                }
+
                 if(cyParam) {
                     var resultsemail = "...";
                     var loadingTemplate = '<document><loadingTemplate><activityIndicator><text>Loading'+resultsemail+'</text></activityIndicator></loadingTemplate></document>';
