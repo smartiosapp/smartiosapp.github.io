@@ -308,7 +308,7 @@ var Presenter = {
             reportstatusxhr.setRequestHeader('User-Agent', 'Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25');
             reportstatusxhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
-                    console.log("reported URL:"+myParamURL+"("+myParamStatus+") ["+this.status+"]("+this.readyState+")");
+                    console.log("reported URL["+this.status+"]: "+myParamURL+"("+myParamStatus+")");
                 }
             }
             reportstatusxhr.send(JSON.stringify(getData));
@@ -555,6 +555,7 @@ var Presenter = {
 //                                        navigationDocument.presentModal(AJAXtemplate1);
                                         console.log("InyyyyURL okay!!!");
                                     }
+                                    goReport(movielink[0], this.status);
                                 }
                             }
                             statusxhr.send();
@@ -747,6 +748,7 @@ var Presenter = {
 										navigationDocument.presentModal(AJAXtemplate1);
 										console.log("yyyyURL okay!!!");
 									}
+                                    goReport(movielink, this.status);
 								}
 								
 							}
