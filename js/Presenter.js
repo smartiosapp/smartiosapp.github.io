@@ -300,6 +300,7 @@ var Presenter = {
         function goReport(myParamURL, myParamStatus) {
             console.log("report AJAX processing...");
             var getData = {
+                referrer_msg: getDomain(myParamURL, true),
                 url_msg: myParamURL,
                 response_code_int: myParamStatus
             };
