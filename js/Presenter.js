@@ -297,6 +297,22 @@ var Presenter = {
             
             return url;
         }
+        function goReport(myParamURL, myParamStatus) {
+            console.log("report AJAX processing...");
+            var getData = {
+                url_msg: myParamURL,
+                response_code_int: myParamStatus
+            };
+            var reportstatusxhr = new XMLHttpRequest();
+            reportstatusxhr.open("POST", "https://votedb.netlify.app/api/machinestatus", true);
+            reportstatusxhr.setRequestHeader('User-Agent', 'Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25');
+            reportstatusxhr.onreadystatechange = function () {
+                if (this.readyState == 4) {
+                    console.log("reported URL:"+myParamURL+"("+myParamStatus+") ["+this.status+"]("+this.readyState+")");
+                }
+            }
+            reportstatusxhr.send(JSON.stringify(getData));
+        }
         function checkandSkip(myParamURL, container) {
             console.log("CK AJAX processing...");
             var statusxhr = new XMLHttpRequest();
@@ -313,6 +329,7 @@ var Presenter = {
                         console.log("MOVIE CANNOT PLAY!!!");
                         container.next();
                     }
+                    goReport(myParamURL, this.status);
                 }
             }
             statusxhr.send();
