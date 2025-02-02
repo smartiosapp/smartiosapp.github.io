@@ -1903,10 +1903,10 @@ o.drmToken = viutoken;
                     console.log("Playlist items: " + player.playlist.length);
                     
                     // Array to keep track of finished media items
-                    let finishedMediaItems = new Array(player.playlist.length).fill(false);
+                    var finishedMediaItems = new Array(player.playlist.length).fill(false);
 
                     player.addEventListener('mediaItemDidChange', function(event) {
-                        let currentIndex = player.playlist.indexOf(event.mediaItem);
+                        var currentIndex = player.playlist.indexOf(event.mediaItem);
                         if (currentIndex > 0 && finishedMediaItems[currentIndex - 1]) {
                             console.log(`Media item ${currentIndex + 1} has started playing.`);
                         } else {
@@ -1915,7 +1915,7 @@ o.drmToken = viutoken;
                     });
 
                     player.addEventListener('timeDidChange', function(event) {
-                        let currentIndex = player.playlist.indexOf(player.currentMediaItem);
+                        var currentIndex = player.playlist.indexOf(player.currentMediaItem);
                         if (currentIndex >= 0 && player.currentTime >= player.playlist[currentIndex].duration - 1) {
                             finishedMediaItems[currentIndex] = true;
                             console.log(`Media item ${currentIndex + 1} has finished.`);
