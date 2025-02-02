@@ -1884,7 +1884,7 @@ o.drmToken = viutoken;
                                         con.next();
                                     } else {
                                         console.log("READY to play!");
-                                        console.log("Next: "+(1+con.playlist.indexOf(con.currentMediaItem));
+                                        console.log("Next: "+ ( 1 + con.playlist.indexOf(con.currentMediaItem ) ) );
                                     }
                                 } else {
                                     console.log("NOT the same movie!");
