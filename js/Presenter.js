@@ -1884,6 +1884,7 @@ o.drmToken = viutoken;
                                         con.next();
                                     } else {
                                         console.log("READY to play!");
+                                        console.log("Next: "+(1+con.playlist.indexOf(con.currentMediaItem));
                                     }
                                 } else {
                                     console.log("NOT the same movie!");
@@ -2038,8 +2039,8 @@ o.drmToken = viutoken;
 //                    goUT("https://pipedapi.kavin.rocks/streams/"+myParam, uideoURL);
 //                    goUT("https://pipedapi.aeong.one/streams/"+myParam, uideoURL);
 //                    goUT("https://api.piped.privacydev.net/streams/"+myParam, uideoURL);
-//                    goUT("https://pipedapi.wireway.ch/streams/"+myParam, uideoURL);
-                    goUT("https://pipedapi.ezero.space/streams/"+myParam, uideoURL);
+                    goUT("https://pipedapi.wireway.ch/streams/"+myParam, uideoURL);
+//                    goUT("https://pipedapi.ezero.space/streams/"+myParam, uideoURL);
 //                    goIn2AppUT("https://m.youtube.com/watch?v="+myParam, uideoURL, uideoTT);
 //                    goUTTV("https://www.youtube.com/appletv/watch?v="+myParam);
 /*
