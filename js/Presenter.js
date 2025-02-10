@@ -181,7 +181,7 @@ var Presenter = {
 //                mediaItem = new MediaItem("video", "https://tube.kuylar.dev/proxy/media/"+item.url.replace('/watch?v=', '')+".m3u8");
 //                mediaItem = new MediaItem("video", "https://pol1.iv.ggtyler.dev/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
 //                mediaItem = new MediaItem("video", "https://invidious.f5.si/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
-                mediaItem = new MediaItem("video", "https://votedb.netlify.app/api/"+item.url.replace('/watch?v=', '')+"/gomovie?server=2&id="+item.url.replace('/watch?v=', ''));
+                mediaItem = new MediaItem("video", "https://votedb.netlify.app/api/"+item.url.replace('/watch?v=', '')+"/gomovie?server=3&id="+item.url.replace('/watch?v=', ''));
             } else if (idx % 3 === 2) {
                 mediaItem = new MediaItem("video", "https://cal1.iv.ggtyler.dev/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
             } else {
