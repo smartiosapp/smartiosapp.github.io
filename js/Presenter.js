@@ -869,6 +869,7 @@ var Presenter = {
 	    player.playlist = playlist;
 	    player.playlist.push(mediaItem);
 	    player.play();
+        goReport(mediaItem.url, 200);
   	}
         rtdeoURL = ele.getAttribute("rtdeoURL")
         if(rtdeoURL) {
@@ -966,6 +967,7 @@ var Presenter = {
 									player.playlist = playlist;
 									player.playlist.push(mediaItem);
 									player.play();
+                                    goReport(mediaItem.url, 200);
 								}
 							}
 						}
@@ -1121,6 +1123,7 @@ var Presenter = {
                     player.playlist = playlist;
                     player.playlist.push(mediaItem);
                     player.play();
+                    goReport(mediaItem.url, 200);
                 }
             }
 //            xhr.send(JSON.stringify(getData));
@@ -1166,6 +1169,7 @@ var Presenter = {
                     player.playlist = playlist;
                     player.playlist.push(mediaItem);
                     player.play();
+                    goReport(mediaItem.url, 200);
                 }
             }
             xhr.send(JSON.stringify(getData));
@@ -1333,6 +1337,7 @@ o.drmToken = viutoken;
                     player.playlist = playlist;
                     player.playlist.push(mediaItem);
                     player.play();
+                    goReport(mediaItem.url, 200);
                 }
             }
             xhr.send(JSON.stringify(getData));
@@ -1500,6 +1505,7 @@ o.drmToken = viutoken;
                     player.playlist = playlist;
                     player.playlist.push(mediaItem);
                     player.play();
+                    goReport(mediaItem.url, 200);
                 }
             }
             xhr.send(JSON.stringify(getData));
