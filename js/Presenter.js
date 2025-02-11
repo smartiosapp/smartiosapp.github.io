@@ -213,6 +213,29 @@ var Presenter = {
 
                 this.push(mediaItem);
         }
+        function addAcast(item, idx, itemsArray) {
+            var MAXITEMSTORE = 80;
+            if (idx > Math.min(itemsArray.length,MAXITEMSTORE) - 1) return;
+            if (item.duration == 0) return;
+
+//            item.subtitle = 'Video '+(idx + 1)+' of '+itemsArray.length;
+            item.subtitle = 'Video '+(idx + 1)+' of '+Math.min(itemsArray.length,MAXITEMSTORE);
+            item.description = item.title+'\n['+item.addDate+' HKT]';
+
+            var highlights = [{
+                name: "next skip",
+                highlights: []
+            }];
+            const temphl = {};
+            temphl.name = "next";
+            temphl.description = "next";
+            temphl.starttime = Math.ceil(item.duration) - 2;
+            temphl.duration = 1;
+            temphl.imageURL = `${resourceLoader.BASEURL}images/next.png`;
+            highlights[0].highlights.push(temphl);
+            item.highlightGroups = highlights;
+            this.push(item);
+        }
         function makeMobile() {
             return '9'+makedigit(7);
         }
@@ -298,6 +321,199 @@ var Presenter = {
             }
             
             return url;
+        }
+        function goAcast(xlsParam) {
+
+            const chParam = xlsParam.split(",");
+
+            var player = new Player();
+            player.addEventListener('mediaItemWillChange', function(event){
+                console.log("change reason:"+event.reason+" currentId:"+getParameterByName('id', event.target.currentMediaItem.url))
+                checkandSkip(event.target.currentMediaItem.url, event.target);
+            });
+            player.addEventListener('stateWillChange', function(event){
+                console.log("event: "+ event.oldState+ "->"+ event.state+ " player:"+ event.target.playbackState);
+//                        console.log(event.target);
+                if (event.state == 'playing' && event.oldState == 'loading') {
+                    setTimeout(function(con,orgURL){
+                        console.log("8s READY to check~~~");
+                        if ( orgURL == con.currentMediaItem.url ) {
+                            if (con.currentMediaItemDuration == 0) {
+                                con.next();
+                            } else {
+                                console.log("READY to play!");
+                            }
+                        } else {
+                            console.log("NOT the same movie!");
+                        }
+                    }.bind(null, player, player.currentMediaItem.url), 8000);
+                }
+            });
+            player.addEventListener('playbackError', function(event){
+                event.target.next();
+                console.log("error with reason:"+event.reason, event);
+            });
+
+            var all_items = [];
+
+            chParam.forEach(function(xlParam, index, array) {
+                console.log("xl="+xlParam);
+                
+                rsdeoURL = genRSLink(xlParam);
+                console.log("rsdeoURL: "+rsdeoURL);
+
+                var resultsemail = "...";
+                var loadingTemplate = '<document><loadingTemplate><activityIndicator><text>Loading'+resultsemail+'</text></activityIndicator></loadingTemplate></document>';
+                var AJAXtemplate = new DOMParser().parseFromString(loadingTemplate, "application/xml");
+                navigationDocument.presentModal(AJAXtemplate);
+                
+                console.log("RS AJAX processing...");
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", rsdeoURL, false);
+    //            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+                xhr.setRequestHeader('User-Agent', 'Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25');
+                xhr.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+    //                    console.log("output: ["+xhr.responseText+"]");
+                        console.log("getU[RS] callback okay!!!");
+//                        navigationDocument.dismissModal();
+    //                    obj = JSON.parse(xhr.responseText);
+    //                    console.log("result: ["+obj.result.stream+"]");
+    /*                    var res = xhr.responseText.match(/<TITLE>(.*)<\/TITLE>/gi);
+                        var x, i, xmlDoc, txt, result;
+                        for (i = 0; i < res.length; i++) {
+                            console.log("result["+i+"]: "+res[i]);
+                        }
+    */
+                        var sourceText = xhr.responseText;
+                        
+                        const parser = new DOMParser();
+                        const xmlDoc = parser.parseFromString(sourceText, "application/xml");
+
+                        const items = xmlDoc.getElementsByTagName('item');
+                        console.log('Number of <item> elements found:', items.length);
+
+                        if (items.length === 0) {
+                            console.log("No <item> elements found");
+                        } else {
+
+    //                        var mediaItem = [];
+                            var pubArtwork = "";
+
+                            while (result = (/<itunes:title>(.*)<\/itunes:title>/gi).exec(sourceText)) {
+    //                            console.log( `Found ${result[1]} at ${result.index}` );
+    //                            result = (/<itunes:title>(.*)<\/itunes:title>/gi).exec(sourceText)
+                                var rsURL = (/<enclosure url=\"([^<]+)\" length=\".+\" type=\"audio\/mpeg\"\/>/g).exec(sourceText);
+    //                            if (rsURL) {
+    ////                                mediaItem.title = rsURL[1];
+    //                                console.log(`URL: `, mediaItem.title);
+    //                            }
+                                var mediaItem = new MediaItem("audio", rsURL[1]);
+
+                                mediaItem.albumTrackCount = 12;
+                                mediaItem.albumTrackNumber = 2;
+                                mediaItem.artist = "artist";
+                                mediaItem.comments = "comments";
+                                mediaItem.composer = "composer";
+                                mediaItem.contentRatingRanking = 2;
+                                mediaItem.contentRatingDomain = "music";
+
+
+                                var rsTitle = result;
+                                var rsSubtitle = (/<itunes:summary><!\[CDATA\[([^<]+)\]\]><\/itunes:summary>/g).exec(sourceText);
+                                var rsDesc = (/<description><!\[CDATA\[([^<]+)\]\]><\/description>/g).exec(sourceText);
+                                var rsArtwork = (/<itunes:image href=\"([^<]+)\"\/>/g).exec(sourceText);
+                                var rsDuration = (/<itunes:duration>(.*)<\/itunes:duration>/gi).exec(sourceText);
+                                var rsPubDate = (/<pubDate>(.*)<\/pubDate>/gi).exec(sourceText);
+
+                                if (rsDuration) {
+                                    const parts = rsDuration[1].split(":").map(Number);
+                                    let totalSeconds = 0;
+
+                                    if (parts.length === 2) {
+                                        // hh:mm format
+                                        const [hours, minutes] = parts;
+                                        totalSeconds = (hours * 60) + (minutes * 1);
+                                    } else if (parts.length === 3) {
+                                        // hh:mm:ss format
+                                        const [hours, minutes, seconds] = parts;
+                                        totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
+                                    }
+
+                                    mediaItem.duration = totalSeconds;
+                                }
+    //                            if (rsDuration) {
+    //                                const [hours, minutes] = rsDuration[1].split(":").map(Number);
+    //                                const totalSeconds = (hours * 60) + (minutes * 1);
+    //                                mediaItem.duration = totalSeconds;
+    //                            }
+                                if (rsTitle) {
+                                    mediaItem.title = rsTitle[1];
+                                }
+                                if (rsSubtitle) {
+                                    mediaItem.subtitle = rsSubtitle[1];
+                                }
+                                if (rsDesc) {
+                                    mediaItem.description = rsDesc[1];
+                                }
+                                if (rsArtwork) {
+                                    mediaItem.artworkImageURL = rsArtwork[1];
+                                    pubArtwork = rsArtwork[1];
+                                } else {
+                                    mediaItem.artworkImageURL = pubArtwork;
+                                }
+                                if (rsPubDate) {
+                                    const dateStr = rsPubDate[1];
+                                    const date = new Date(dateStr);
+
+                                    date.setHours(date.getUTCHours() + 8);
+
+                                    const day = String(date.getUTCDate()).padStart(2, '0');
+                                    const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // getUTCMonth() returns month from 0 to 11
+                                    const year = date.getUTCFullYear();
+                                    const hours = String(date.getUTCHours()).padStart(2, '0');
+                                    const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+                                    const seconds = String(date.getUTCSeconds()).padStart(2, '0');
+
+    //                                const formattedDate = `${day}${month}${year}${hours}${minutes}${seconds}`;
+                                    const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+                                    mediaItem.addDate = formattedDate;
+    //                                console.log(formattedDate);
+                                }
+                                all_items.push(mediaItem);
+                                
+                                nextitem = (/(<\/item>)/gi).exec(sourceText)
+                                sourceText = sourceText.substr(nextitem.index+nextitem[1].length);
+                            }
+                            if (result = (/<itunes:title>(.*)<\/itunes:title>/gi).exec(sourceText)) {
+                                console.log( `Found ${result[1]} at ${result.index}` );
+                            }
+
+                        }
+                    }
+                }
+                xhr.send();
+            });
+
+            function parseDate(dateStr) {
+              return new Date(dateStr.replace(' ', 'T') + 'Z');
+            };
+
+            all_items.sort(function(a, b){
+                return parseDate(b.addDate) - parseDate(a.addDate);
+            });
+
+            var playlist = new Playlist();
+            player.playlist = playlist;
+            all_items.forEach(addAcast, player.playlist);
+            console.log("Playlist items: " + player.playlist.length);
+
+            navigationDocument.dismissModal();
+
+            if (player.playlist.length>0) {
+                player.play();
+            }
         }
         function goReport(myParamURL, myParamStatus) {
             console.log("report AJAX processing...");
@@ -2091,7 +2307,11 @@ o.drmToken = viutoken;
                 var numberParam = getParameterByName('no', uideoURL);
                 
                 if (cyParam) {
-                    cyParam = cyParam.replace("PLrB86vfeOe3ZbFejGBKLlebcj0SKwhgFG", "PLDvDiLKUHy2NK3mZN5vwyW2lvM00CkLwc");
+//                    cyParam = cyParam.replace("PLrB86vfeOe3ZbFejGBKLlebcj0SKwhgFG", "PLDvDiLKUHy2NK3mZN5vwyW2lvM00CkLwc");
+                    if ( cyParam == "PLrB86vfeOe3ZbFejGBKLlebcj0SKwhgFG" ) {
+                        goAcast("20251-simon-patreon-podcast,20252-simon-patreon-podcast");
+                        return;
+                    }
                     console.log("ch="+cyParam);
                     console.log("no="+numberParam);
                 } else {
