@@ -374,21 +374,13 @@ var Presenter = {
 
                 var xhr = new XMLHttpRequest();
                 xhr.open("GET", rsdeoURL, false);
-    //            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+//                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
                 xhr.setRequestHeader('User-Agent', 'Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25');
                 xhr.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
-    //                    console.log("output: ["+xhr.responseText+"]");
+//                        console.log("output: ["+xhr.responseText+"]");
                         console.log("getU[RS] callback okay!!!");
-//                        navigationDocument.dismissModal();
-    //                    obj = JSON.parse(xhr.responseText);
-    //                    console.log("result: ["+obj.result.stream+"]");
-    /*                    var res = xhr.responseText.match(/<TITLE>(.*)<\/TITLE>/gi);
-                        var x, i, xmlDoc, txt, result;
-                        for (i = 0; i < res.length; i++) {
-                            console.log("result["+i+"]: "+res[i]);
-                        }
-    */
+
                         var sourceText = xhr.responseText;
                         
                         const parser = new DOMParser();
@@ -401,26 +393,13 @@ var Presenter = {
                             console.log("No <item> elements found");
                         } else {
 
-    //                        var mediaItem = [];
                             var pubArtwork = "";
 
                             while (result = (/<itunes:title>(.*)<\/itunes:title>/gi).exec(sourceText)) {
-    //                            console.log( `Found ${result[1]} at ${result.index}` );
-    //                            result = (/<itunes:title>(.*)<\/itunes:title>/gi).exec(sourceText)
-                                var rsURL = (/<enclosure url=\"([^<]+)\" length=\".+\" type=\"audio\/mpeg\"\/>/g).exec(sourceText);
-    //                            if (rsURL) {
-    ////                                mediaItem.title = rsURL[1];
-    //                                console.log(`URL: `, mediaItem.title);
-    //                            }
-                                var mediaItem = new MediaItem("audio", rsURL[1]);
 
-                                mediaItem.albumTrackCount = 12;
-                                mediaItem.albumTrackNumber = 2;
-                                mediaItem.artist = "artist";
-                                mediaItem.comments = "comments";
-                                mediaItem.composer = "composer";
-                                mediaItem.contentRatingRanking = 2;
-                                mediaItem.contentRatingDomain = "music";
+                                var rsURL = (/<enclosure url=\"([^<]+)\" length=\".+\" type=\"audio\/mpeg\"\/>/g).exec(sourceText);
+
+                                var mediaItem = new MediaItem("audio", rsURL[1]);
 
 
                                 var rsTitle = result;
@@ -446,11 +425,6 @@ var Presenter = {
 
                                     mediaItem.duration = totalSeconds;
                                 }
-    //                            if (rsDuration) {
-    //                                const [hours, minutes] = rsDuration[1].split(":").map(Number);
-    //                                const totalSeconds = (hours * 60) + (minutes * 1);
-    //                                mediaItem.duration = totalSeconds;
-    //                            }
                                 if (rsTitle) {
                                     mediaItem.title = rsTitle[1];
                                 }
@@ -479,11 +453,11 @@ var Presenter = {
                                     const minutes = String(date.getUTCMinutes()).padStart(2, '0');
                                     const seconds = String(date.getUTCSeconds()).padStart(2, '0');
 
-    //                                const formattedDate = `${day}${month}${year}${hours}${minutes}${seconds}`;
+//                                    const formattedDate = `${day}${month}${year}${hours}${minutes}${seconds}`;
                                     const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 
                                     mediaItem.addDate = formattedDate;
-    //                                console.log(formattedDate);
+//                                    console.log(formattedDate);
                                 }
                                 all_items.push(mediaItem);
                                 
