@@ -357,7 +357,14 @@ var Presenter = {
                 console.log("error with reason:"+event.reason, event);
             });
 
+            var resultsemail = "...";
+            var loadingTemplate = '<document><loadingTemplate><activityIndicator><text>Loading'+resultsemail+'</text></activityIndicator></loadingTemplate></document>';
+            var AJAXtemplate = new DOMParser().parseFromString(loadingTemplate, "application/xml");
+            navigationDocument.presentModal(AJAXtemplate);
+            
             var all_items = [];
+
+            console.log("RS AJAX processing...");
 
             chParam.forEach(function(xlParam, index, array) {
                 console.log("xl="+xlParam);
@@ -365,12 +372,6 @@ var Presenter = {
                 rsdeoURL = genRSLink(xlParam);
                 console.log("rsdeoURL: "+rsdeoURL);
 
-                var resultsemail = "...";
-                var loadingTemplate = '<document><loadingTemplate><activityIndicator><text>Loading'+resultsemail+'</text></activityIndicator></loadingTemplate></document>';
-                var AJAXtemplate = new DOMParser().parseFromString(loadingTemplate, "application/xml");
-                navigationDocument.presentModal(AJAXtemplate);
-                
-                console.log("RS AJAX processing...");
                 var xhr = new XMLHttpRequest();
                 xhr.open("GET", rsdeoURL, false);
     //            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
