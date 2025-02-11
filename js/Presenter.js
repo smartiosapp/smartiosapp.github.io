@@ -275,6 +275,9 @@ var Presenter = {
 		function genRTLink2(yl) {
 			return 'http://geoblock-akamai.rthk.hk.edgesuite.net/apps/tvapp/feeds_v3.php?language=zh&action=retrieveepisodedetail&episodeid='+yl;
 		}
+        function genRSLink(xl) {
+            return 'https://feeds.acast.com/public/shows/'+xl;
+        }
         function geniLink() {
             return 'https://mobileapp.i-cable.com/iCableMobile/API/api.php?appVersion=1.0.6&channel_no=_9&deviceModel=iPad&deviceName=iPad&deviceToken=&hkid='+makeMobile()+'&is_premium=0&method=streamingGenerator&network=wifi&osVersion=11.0.3&platform=4&quality=l&type=live&uuid='+makeUUID();
         }
@@ -486,10 +489,6 @@ var Presenter = {
                                 nextitem = (/(<\/item>)/gi).exec(sourceText)
                                 sourceText = sourceText.substr(nextitem.index+nextitem[1].length);
                             }
-                            if (result = (/<itunes:title>(.*)<\/itunes:title>/gi).exec(sourceText)) {
-                                console.log( `Found ${result[1]} at ${result.index}` );
-                            }
-
                         }
                     }
                 }
