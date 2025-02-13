@@ -219,8 +219,22 @@ var Presenter = {
             if (item.duration == 0) return;
 
 //            item.subtitle = 'Video '+(idx + 1)+' of '+itemsArray.length;
-            item.subtitle = 'Video '+(idx + 1)+' of '+Math.min(itemsArray.length,MAXITEMSTORE);
+            item.subtitle = 'Talk '+(idx + 1)+' of '+Math.min(itemsArray.length,MAXITEMSTORE);
             item.description = item.title+'\n['+item.addDate+' HKT]';
+
+            const regex = /^【.*?】/;
+            const match = item.title.match(regex);
+
+            if (match) {
+                item.title = match[0].trim();
+            } else if (item.title.includes("｜")) {
+                // Split the input string by "｜" and return the first element
+                item.title = item.title.split("｜")[0].trim();
+            }
+            
+            item.title = item.title.replace(/　/g, "\n");
+            item.title = item.title.replace(/：/g, "：\n");
+            item.title = item.title.replace(/・/g, "・\n");
 
             var highlights = [{
                 name: "next skip",
