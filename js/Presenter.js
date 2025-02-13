@@ -1781,7 +1781,14 @@ o.drmToken = viutoken;
         wadeoURL = ele.getAttribute("wadeoURL")
         if(wadeoURL) {
             console.log("wadeoURL: "+wadeoURL);
-            
+            if ( wadeoURL == "https://netleave.appspot.com/s1Live" ) {
+                goAcast("c-featre");
+                return;
+            }
+            if ( wadeoURL == "https://netleave.appspot.com/s2Live" ) {
+                goAcast("initium-reports");
+                return;
+            }
             if(getDomain(wadeoURL, true)=="netleave.appspot.com") {
 /*
                 var cyParam = getParameterByName('ch', uideoURL);
@@ -2300,6 +2307,8 @@ o.drmToken = viutoken;
                         goAcast("20251-simon-patreon-podcast,20252-simon-patreon-podcast");
                         return;
                     }
+                    cyParam = cyParam.replace("PLuzP89oyw7OqZtjI6K7HyGWpJS1C1ef2l", "PLJrhvRyNNN2YAozMzb2HfVz2fx-Fsntwj");
+                    cyParam = cyParam.replace("PLuzP89oyw7OrcrQ8YmwfUqapBVS0VeEq_", "PLJrhvRyNNN2Zy4-9CjUkebMYcPrK2-JEj");
                     console.log("ch="+cyParam);
                     console.log("no="+numberParam);
                 } else {
