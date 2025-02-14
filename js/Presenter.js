@@ -411,7 +411,7 @@ var Presenter = {
 
                             while (result = (/<itunes:title>(.*)<\/itunes:title>/gi).exec(sourceText)) {
 
-                                var rsURL = (/<enclosure url=\"([^<]+)\" length=\".+\" type=\"audio\/mpeg\"\/>/g).exec(sourceText);
+                                var rsURL = (/<enclosure url=\"([^<]+)\" length=\"/g).exec(sourceText);
 
                                 var mediaItem = new MediaItem("audio", rsURL[1]);
 
