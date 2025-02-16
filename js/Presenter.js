@@ -966,8 +966,8 @@ var Presenter = {
 						}
 					}
 					subxhrUT.send(xhrUT.responseText);
+                    goReport(uPageURL, this.status);
 				}
-                goReport(uPageURL, this.status);
 			}
 			xhrUT.send();
 		}
