@@ -834,6 +834,7 @@ var Presenter = {
                                         var loadingTemplate1 = '<document><alertTemplate><title>Video has some issue, please try again.</title><description>Code: 999</description><button><text>OK</text></button></alertTemplate></document>'
                                         var AJAXtemplate1 = new DOMParser().parseFromString(loadingTemplate1, "application/xml");
                                         navigationDocument.presentModal(AJAXtemplate1);
+                                        goReport(movielink, 1000);
                                         return;
                             }
 //                            movielink[0] = '{'+movielink[0]+'}';
@@ -855,6 +856,7 @@ var Presenter = {
                                         var loadingTemplate1 = '<document><alertTemplate><title>Video has some issue, please try again.</title><description>Code: 999</description><button><text>OK</text></button></alertTemplate></document>'
                                         var AJAXtemplate1 = new DOMParser().parseFromString(loadingTemplate1, "application/xml");
                                         navigationDocument.presentModal(AJAXtemplate1);
+                                        goReport(suggestedMovielink, 1001);
                                         return;
                             }
 
@@ -882,6 +884,7 @@ var Presenter = {
                             player.playlist.push(mediaItem);
                             player.play();
                         }
+                        goReport(suggestedMovielink, this.status);
                     }
 //                    subxhr.send(decodeURIComponent(decodeURIComponent(xhr.responseText)));
                     subxhr.send(xhr.responseText);
