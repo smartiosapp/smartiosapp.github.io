@@ -1,0 +1,8 @@
+######### Jetso config #########
+FeedPattern|https://smartbuyerpager.appspot.com/getjetso
+FeedIDs|123456
+ddPattern|yyyy-MM-dd HH:mm:ss.SSSSSS
+vaildingPattern|<item>
+ssPattern|(http://((bit.ly)||(fb.me))/\w+)
+mailTitle|我有筍嘢話你知
+mailBoby|老友請注意，<br>放低手上嘅工作！<br>我有著數益你…<br>
