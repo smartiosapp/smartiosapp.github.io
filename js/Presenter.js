@@ -2191,7 +2191,8 @@ o.drmToken = viutoken;
 //            prdeoURL = 'https://pipedapi.tokhmi.xyz/channel/'+cyParam
 //            prdeoURL = 'https://api-piped.mha.fi/channel/'+cyParam
 //            prdeoURL = 'https://piped-api.garudalinux.org/channel/'+cyParam
-            prdeoURL = 'https://pipedapi.drgns.space/channel/'+cyParam
+//            prdeoURL = 'https://pipedapi.drgns.space/channel/'+cyParam
+            prdeoURL = 'https://pipedapi.orangenet.cc/channel/'+cyParam
             console.log("prdeoURL: "+prdeoURL);
 
             var xhr = new XMLHttpRequest();
