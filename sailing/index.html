@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>3D Sail Controls — Mainsheet, Vang, Outhaul</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    html, body { margin: 0; height: 100%; background: #0a0f16; color: #e9edf1; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+    #app { position: fixed; inset: 0; display: grid; grid-template-columns: 320px 1fr; }
+    #ui {
+      padding: 16px; background: linear-gradient(180deg, #101722 0%, #0b1119 100%);
+      border-right: 1px solid #1b2838; overflow: auto;
+    }
+    h1 { font-size: 18px; margin: 0 0 8px; font-weight: 600; }
+    h2 { font-size: 13px; margin: 18px 0 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #9bb3c7; }
+    .row { margin: 10px 0 14px; }
+    .row label { display: flex; justify-content: space-between; font-size: 12px; color: #c8d7e1; margin-bottom: 6px; }
+    input[type="range"] { width: 100%; accent-color: #50c2ff; }
+    .val { color: #8fd0ff; margin-left: 8px; min-width: 42px; text-align: right; }
+    .hint { font-size: 11px; color: #8aa1b3; margin-top: 6px; line-height: 1.3; }
+    #viewport { position: relative; }
+    #credit {
+      position: absolute; right: 12px; bottom: 10px; font-size: 11px; color: #9bb3c7;
+      background: rgba(10,15,22,.55); padding: 6px 8px; border-radius: 6px; backdrop-filter: blur(4px);
+    }
+    .btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    button {
+      background: #12202e; color: #dce9f2; border: 1px solid #1e3446; padding: 6px 10px; border-radius: 6px; cursor: pointer;
+    }
+    button:hover { background: #163043; }
+    .small { font-size: 11px; opacity: .85; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div id="ui">
+      <h1>3D Sail Trim — Main Controls</h1>
+
+      <h2>Wind</h2>
+      <div class="row">
+        <label>
+          <span>Wind speed (kt)</span>
+          <span class="val" id="windSpeedVal">12</span>
+        </label>
+        <input id="windSpeed" type="range" min="0" max="30" step="1" value="12" />
+      </div>
+      <div class="row">
+        <label>
+          <span>Wind direction (° rel. bow)</span>
+          <span class="val" id="windDirVal">45</span>
+        </label>
+        <input id="windDir" type="range" min="-180" max="180" step="1" value="45" />
+        <div class="hint">0° is on the nose, + to starboard, − to port.</div>
+      </div>
+
+      <h2>Controls</h2>
+      <div class="row">
+        <label>
+          <span>Mainsheet (tight)</span>
+          <span class="val" id="sheetVal">70%</span>
+        </label>
+        <input id="sheet" type="range" min="0" max="100" step="1" value="70" />
+        <div class="hint">Sets boom angle and leech tension. Tighter = boom in, less twist.</div>
+      </div>
+      <div class="row">
+        <label>
+          <span>Vang (on)</span>
+          <span class="val" id="vangVal">40%</span>
+        </label>
+        <input id="vang" type="range" min="0" max="100" step="1" value="40" />
+        <div class="hint">Pulls boom down, reducing twist. Adds leech tension off‑wind.</div>
+      </div>
+      <div class="row">
+        <label>
+          <span>Outhaul (tight)</span>
+          <span class="val" id="outhaulVal">60%</span>
+        </label>
+        <input id="outhaul" type="range" min="0" max="100" step="1" value="60" />
+        <div class="hint">Flattens the foot and overall draft. Looser adds depth for power.</div>
+      </div>
+
+      <h2>Presets</h2>
+      <div class="row btn-row">
+        <button id="presetUpwind">Upwind 12 kt</button>
+        <button id="presetReachLight">Broad reach 6 kt</button>
+        <button id="presetOverpowered">Gusty 20 kt</button>
+        <button id="reset" class="small">Reset view</button>
+      </div>
+
+      <h2>Notes</h2>
+      <div class="hint">
+        • Simplified aero/rig model for learning. CE responds to twist, draft, and boom angle.<br/>
+        • CE trail shows how trim shifts balance. Yellow dot is CLR reference.
+      </div>
+    </div>
+    <div id="viewport"></div>
+  </div>
+
+  <div id="credit">Orbit: drag • Zoom: wheel • Pan: right‑drag</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+  <script>
+    // Scene setup
+    const viewport = document.getElementById('viewport');
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth - 320, window.innerHeight);
+    renderer.setClearColor(0x0a0f16, 1);
+    renderer.shadowMap.enabled = true;
+    viewport.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.PerspectiveCamera(55, (window.innerWidth - 320) / window.innerHeight, 0.1, 500);
+    camera.position.set(8, 4, 10);
+
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.target.set(0, 3, 0);
+    controls.enableDamping = true;
+
+    // Lighting
+    const hemi = new THREE.HemisphereLight(0xcde7ff, 0x0a0f16, 0.8);
+    scene.add(hemi);
+
+    const dir = new THREE.DirectionalLight(0xffffff, 0.9);
+    dir.position.set(10, 12, 7);
+    dir.castShadow = true;
+    dir.shadow.mapSize.set(1024, 1024);
+    scene.add(dir);
+
+    // Ground/water plane
+    const water = new THREE.Mesh(
+      new THREE.PlaneGeometry(100, 100),
+      new THREE.MeshPhongMaterial({ color: 0x0d1d2a, shininess: 20, specular: 0x204a64, side: THREE.DoubleSide, transparent: true, opacity: 0.95 })
+    );
+    water.rotation.x = -Math.PI / 2;
+    water.position.y = 0;
+    water.receiveShadow = true;
+    scene.add(water);
+
+    // Boat rig group (origin at mast step)
+    const rig = new THREE.Group();
+    scene.add(rig);
+
+    // Simple hull silhouette (for reference)
+    const hull = new THREE.Mesh(
+      new THREE.BoxGeometry(7.5, 0.6, 2.4),
+      new THREE.MeshStandardMaterial({ color: 0x1c2a36, metalness: 0.1, roughness: 0.7 })
+    );
+    hull.position.set(0.5, 0.3, 0);
+    hull.castShadow = true;
+    hull.receiveShadow = true;
+    rig.add(hull);
+
+    // Centerboard/fin and CLR marker
+    const fin = new THREE.Mesh(
+      new THREE.BoxGeometry(0.2, 1.6, 0.5),
+      new THREE.MeshStandardMaterial({ color: 0x223645, metalness: 0.0, roughness: 0.9, transparent: true, opacity: 0.9 })
+    );
+    fin.position.set(1.0, 0.8, 0);
+    fin.castShadow = true;
+    fin.receiveShadow = true;
+    rig.add(fin);
+
+    const clrMarker = new THREE.Mesh(
+      new THREE.SphereGeometry(0.07, 16, 16),
+      new THREE.MeshBasicMaterial({ color: 0xffcc00 })
+    );
+    clrMarker.position.set(1.0, 0.8, 0.25);
+    rig.add(clrMarker);
+
+    // Mast
+    const mastHeight = 9.0;
+    const mast = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.07, 0.09, mastHeight, 24),
+      new THREE.MeshStandardMaterial({ color: 0xb7c6d2, metalness: 0.7, roughness: 0.35 })
+    );
+    mast.position.set(0, mastHeight / 2, 0);
+    mast.castShadow = true;
+    mast.receiveShadow = true;
+    rig.add(mast);
+
+    // Boom + sail live in this group so we can rotate by mainsheet (yaw) and vang (drop)
+    const boomSail = new THREE.Group();
+    boomSail.position.set(0, 0, 0); // pivot at mast base
+    rig.add(boomSail);
+
+    // Boom
+    const boomLen = 4.6;
+    const boom = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.06, 0.07, boomLen, 24),
+      new THREE.MeshStandardMaterial({ color: 0x9fb3c2, metalness: 0.6, roughness: 0.45 })
+    );
+    boom.geometry.rotateZ(Math.PI / 2);
+    boom.position.set(boomLen / 2, 0, 0);
+    boom.castShadow = true;
+    boom.receiveShadow = true;
+    boomSail.add(boom);
+
+    // Gooseneck fitting visual
+    const gooseneck = new THREE.Mesh(
+      new THREE.TorusGeometry(0.11, 0.025, 12, 24),
+      new THREE.MeshStandardMaterial({ color: 0x8aa0ae, metalness: 0.6, roughness: 0.4 })
+    );
+    gooseneck.rotation.y = Math.PI / 2;
+    boomSail.add(gooseneck);
+
+    // Sail geometry (triangular via taper)
+    const sailWidth = boomLen;
+    const sailHeight = mastHeight * 0.9; // head below mast top
+    const segW = 28, segH = 36;
+
+    const sailGeom = new THREE.BufferGeometry();
+    const verts = [];
+    const uvs = [];
+    const indices = [];
+
+    function idx(i, j) { return j * (segW + 1) + i; }
+
+    for (let j = 0; j <= segH; j++) {
+      const v = j / segH;          // 0 bottom (foot), 1 top (head)
+      const widthAtV = sailWidth * (1 - v); // taper to triangular head
+      for (let i = 0; i <= segW; i++) {
+        const u = (segW === 0) ? 0 : i / segW; // 0 at luff, 1 at leech
+        const x = widthAtV * u;   // along boom
+        const y = sailHeight * v; // up mast
+        const z = 0;              // out of plane (camber applied later)
+        verts.push(x, y, z);
+        uvs.push(u, v);
+      }
+    }
+    // Indices for triangle strip while skipping degenerate beyond taper
+    for (let j = 0; j < segH; j++) {
+      for (let i = 0; i < segW; i++) {
+        // Skip quads that collapse near head (where widthAtV ~ 0)
+        if ((i / segW) > (1 - j / segH) || ((i + 1) / segW) > (1 - j / segH)) continue;
+        const a = idx(i, j), b = idx(i + 1, j), c = idx(i, j + 1), d = idx(i + 1, j + 1);
+        indices.push(a, b, d, a, d, c);
+      }
+    }
+    sailGeom.setAttribute('position', new THREE.Float32BufferAttribute(verts, 3));
+    sailGeom.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
+    sailGeom.setIndex(indices);
+    sailGeom.computeVertexNormals();
+
+    // Sail material
+    const sailMat = new THREE.MeshPhongMaterial({
+      color: 0xf3f6fb, specular: 0x9fb8cc, shininess: 40,
+      side: THREE.DoubleSide, transparent: true, opacity: 0.98
+    });
+    const sail = new THREE.Mesh(sailGeom, sailMat);
+    sail.castShadow = true;
+    sail.receiveShadow = false;
+    sail.position.set(0, 0, 0);
+    boomSail.add(sail);
+
+    // CE marker + trail
+    const ceMarker = new THREE.Mesh(
+      new THREE.SphereGeometry(0.09, 16, 16),
+      new THREE.MeshBasicMaterial({ color: 0xff3344 })
+    );
+    scene.add(ceMarker);
+
+    const ceTrailGeom = new THREE.BufferGeometry();
+    const ceTrailMax = 60;
+    const ceTrailPos = new Float32Array(ceTrailMax * 3);
+    ceTrailGeom.setAttribute('position', new THREE.BufferAttribute(ceTrailPos, 3));
+    const ceTrail = new THREE.Line(
+      ceTrailGeom,
+      new THREE.LineBasicMaterial({ color: 0xff6677, transparent: true, opacity: 0.8 })
+    );
+    scene.add(ceTrail);
+    let ceTrailIndex = 0;
+
+    // Wind arrow
+    const windDirGroup = new THREE.Group();
+    scene.add(windDirGroup);
+    const arrow = new THREE.ArrowHelper(new THREE.Vector3(0, 0, -1), new THREE.Vector3(0, 5, 0), 2.5, 0x66d1ff, 0.4, 0.25);
+    windDirGroup.add(arrow);
+
+    // Parameters (controlled by UI)
+    const params = {
+      windSpeed: 12,      // kt
+      windDirDeg: 45,     // deg relative to bow (bow faces +X)
+      sheet: 70,          // 0..100
+      vang: 40,           // 0..100
+      outhaul: 60         // 0..100
+    };
+
+    // Map UI elements
+    const el = id => document.getElementById(id);
+    const windSpeed = el('windSpeed'), windSpeedVal = el('windSpeedVal');
+    const windDir = el('windDir'), windDirVal = el('windDirVal');
+    const sheet = el('sheet'), sheetVal = el('sheetVal');
+    const vang = el('vang'), vangVal = el('vangVal');
+    const outhaul = el('outhaul'), outhaulVal = el('outhaulVal');
+
+    // Presets
+    el('presetUpwind').onclick = () => { windSpeed.value = 12; sheet.value = 80; vang.value = 60; outhaul.value = 70; windDir.value = 25; syncUI(); };
+    el('presetReachLight').onclick = () => { windSpeed.value = 6; sheet.value = 45; vang.value = 25; outhaul.value = 35; windDir.value = 120; syncUI(); };
+    el('presetOverpowered').onclick = () => { windSpeed.value = 20; sheet.value = 90; vang.value = 80; outhaul.value = 90; windDir.value = 35; syncUI(); };
+    el('reset').onclick = () => { controls.reset(); controls.target.set(0,3,0); camera.position.set(8,4,10); };
+
+    // Update UI labels and trigger render update
+    [windSpeed, windDir, sheet, vang, outhaul].forEach(inp => inp.addEventListener('input', syncUI));
+
+    function syncUI() {
+      params.windSpeed = parseFloat(windSpeed.value);
+      params.windDirDeg = parseFloat(windDir.value);
+      params.sheet = parseFloat(sheet.value);
+      params.vang = parseFloat(vang.value);
+      params.outhaul = parseFloat(outhaul.value);
+
+      windSpeedVal.textContent = params.windSpeed.toFixed(0);
+      windDirVal.textContent = params.windDirDeg.toFixed(0);
+      sheetVal.textContent = `${params.sheet.toFixed(0)}%`;
+      vangVal.textContent = `${params.vang.toFixed(0)}%`;
+      outhaulVal.textContent = `${params.outhaul.toFixed(0)}%`;
+
+      updateRigAndSail();
+    }
+
+    // Helper: degrees to radians
+    const deg2rad = d => d * Math.PI / 180;
+
+    // Main update: apply sheet, vang, outhaul to geometry + CE
+    function updateRigAndSail() {
+      // Sheet maps to boom yaw angle (loose = 35°, tight = 0°)
+      const boomYawLooseDeg = 35;
+      const boomYaw = deg2rad(boomYawLooseDeg * (1 - params.sheet / 100));
+
+      // Vang maps to drop angle around Z (0.. ~8° down)
+      const vangMaxDeg = 8;
+      const boomDrop = -deg2rad(vangMaxDeg * (params.vang / 100));
+
+      // Outhaul maps to camber depth (loose ~ 18 cm, tight ~ 2 cm on a 4.6 m foot)
+      const camberLoose = sailWidth * 0.04; // ~18 cm
+      const camberTight = sailWidth * 0.004; // ~2 cm
+      const baseCamber = THREE.MathUtils.lerp(camberLoose, camberTight, params.outhaul / 100);
+
+      // Leech tension (sheet + vang) reduces twist and camber slightly
+      const tension = THREE.MathUtils.clamp((params.sheet * 0.7 + params.vang * 0.3) / 100, 0, 1);
+
+      // Twist: more when loose, less when tight; scale with height
+      const twistMaxDeg = 18; // at head
+      const twist = deg2rad(twistMaxDeg * (1 - tension)); // head twist relative to foot
+
+      // Slight camber reduction with tension
+      const camber = baseCamber * (1 - 0.25 * tension);
+
+      // Boom yaw and drop applied at group
+      boomSail.rotation.set(0, 0, 0);
+      boomSail.rotation.y = boomYaw;
+      boomSail.rotation.z = boomDrop;
+
+      // Adjust gooseneck height with vang a touch (visual)
+      gooseneck.position.y = -Math.sin(-boomDrop) * (boomLen * 0.02);
+
+      // Update sail vertex positions for twist + camber
+      const pos = sail.geometry.attributes.position;
+      const count = pos.count;
+
+      for (let idx = 0; idx < count; idx++) {
+        // Original parametric u,v reconstruction
+        const uvU = sail.geometry.attributes.uv.getX(idx);
+        const uvV = sail.geometry.attributes.uv.getY(idx);
+        const widthAtV = sailWidth * (1 - uvV);
+
+        // Base x,y before twist/camber
+        let x = widthAtV * uvU;
+        let y = sailHeight * uvV;
+        let z = 0;
+
+        // Local chord coordinate s (0 luff -> 1 leech)
+        const chord = Math.max(0.0001, widthAtV);
+        const s = chord ? (x / chord) : 0;
+
+        // Camber depth distribution (4*s*(1-s)) peaking mid‑chord, fade aloft
+        const fadeAloft = 1 - 0.45 * uvV; // less depth higher up
+        const localCamber = camber * fadeAloft;
+        z += 4 * localCamber * s * (1 - s);
+
+        // Twist: rotate around luff (x about y‑axis) by phi(v) = twist * v
+        const phi = twist * uvV;
+        const cos = Math.cos(phi), sin = Math.sin(phi);
+        const xRot = x * cos - z * sin;
+        const zRot = x * sin + z * cos;
+        x = xRot; z = zRot;
+
+        // Subtle leech hook reduction from vang tension (tight leech straighter near head)
+        const leechTension = tension;
+        const hookReduce = 1 - 0.2 * leechTension * uvV * s;
+        z *= hookReduce;
+
+        // Apply to buffer
+        pos.setXYZ(idx, x, y, z);
+      }
+
+      sail.geometry.attributes.position.needsUpdate = true;
+      sail.geometry.computeVertexNormals();
+
+      // Update wind arrow relative to bow (+X). Positive degrees = starboard.
+      windDirGroup.position.set(0, 5, 0);
+      windDirGroup.rotation.set(0, 0, 0);
+      windDirGroup.rotation.y = -deg2rad(params.windDirDeg);
+
+      // Compute CE (simple weighted centroid based on camber and twist)
+      const ce = computeCE();
+      ceMarker.position.copy(ce);
+
+      // Update CE trail
+      ceTrailPos[3 * ceTrailIndex + 0] = ce.x;
+      ceTrailPos[3 * ceTrailIndex + 1] = ce.y;
+      ceTrailPos[3 * ceTrailIndex + 2] = ce.z;
+      ceTrailIndex = (ceTrailIndex + 1) % ceTrailMax;
+      ceTrail.geometry.attributes.position.needsUpdate = true;
+
+      // Softly tilt hull by apparent power (visual feedback)
+      const heel = THREE.MathUtils.clamp((params.windSpeed / 30) * (1 - tension * 0.6) * 10 * Math.PI / 180, 0, 12 * Math.PI / 180);
+      rig.rotation.z = -heel * Math.cos(deg2rad(params.windDirDeg));
+    }
+
+    function computeCE() {
+      // Approximate per‑cell centroid weighted by pressure proxy:
+      // w = (0.6 + 0.4*camberFactor) * (0.6 + 0.4*(1 - twistFrac)) * angleOfAttackFactor
+      const pos = sail.geometry.attributes.position;
+      const uv = sail.geometry.attributes.uv;
+      const idxs = sail.geometry.index.array;
+      let wSum = 0;
+      const ce = new THREE.Vector3(0, 0, 0);
+
+      // Angle of attack proxy from boom yaw vs wind direction (bow along +X).
+      const aoaDeg = THREE.MathUtils.euclideanModulo(params.windDirDeg - THREE.MathUtils.radToDeg(boomSail.rotation.y), 360);
+      const aoa = Math.abs((((aoaDeg + 180) % 360) - 180)); // -180..180 -> magnitude
+      const aoaFactor = THREE.MathUtils.clamp((aoa / 90), 0, 1); // 0 upwind to 1 beam/broad for power proxy
+
+      for (let t = 0; t < idxs.length; t += 3) {
+        const ia = idxs[t], ib = idxs[t + 1], ic = idxs[t + 2];
+
+        const a = new THREE.Vector3().fromBufferAttribute(pos, ia);
+        const b = new THREE.Vector3().fromBufferAttribute(pos, ib);
+        const c = new THREE.Vector3().fromBufferAttribute(pos, ic);
+
+        const uvA = new THREE.Vector2(uv.getX(ia), uv.getY(ia));
+        const uvB = new THREE.Vector2(uv.getX(ib), uv.getY(ib));
+        const uvC = new THREE.Vector2(uv.getX(ic), uv.getY(ic));
+
+        const triCentroid = new THREE.Vector3().add(a).add(b).add(c).multiplyScalar(1 / 3);
+        const area = new THREE.Vector3().crossVectors(new THREE.Vector3().subVectors(b, a), new THREE.Vector3().subVectors(c, a)).length() * 0.5;
+
+        const vMean = (uvA.y + uvB.y + uvC.y) / 3;
+        const sMean = ((uvA.x + uvB.x + uvC.x) / 3);
+        const twistFrac = vMean; // more twist aloft in this simple model
+        const camberFactor = 1 - Math.abs(0.5 - sMean) * 2; // peak mid‑chord
+
+        const w = area * (0.6 + 0.4 * camberFactor) * (0.6 + 0.4 * (1 - twistFrac)) * (0.5 + 0.5 * aoaFactor) * (0.5 + 0.5 * (params.windSpeed / 30));
+        ce.addScaledVector(triCentroid, w);
+        wSum += w;
+      }
+      if (wSum > 0) ce.multiplyScalar(1 / wSum);
+
+      // Transform CE into world considering boom yaw/drop and rig position
+      const ceWorld = ce.clone();
+      boomSail.localToWorld(ceWorld);
+      return ceWorld;
+    }
+
+    // Initial sync and animation
+    syncUI();
+
+    function animate() {
+      controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Resize handling
+    window.addEventListener('resize', () => {
+      const w = window.innerWidth - 320;
+      const h = window.innerHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    });
+  </script>
+</body>
+</html>
+
+
