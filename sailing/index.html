@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>3D Sail Controls — Mainsheet, Vang, Outhaul</title>
+  <title>3D Sail Controls — Mainsheet, Vang[kicker], Outhaul</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     html, body { margin: 0; height: 100%; background: #0a0f16; color: #e9edf1; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
@@ -64,7 +64,7 @@
       </div>
       <div class="row">
         <label>
-          <span>Vang (on)</span>
+          <span>Vang[kicker] (on)</span>
           <span class="val" id="vangVal">40%</span>
         </label>
         <input id="vang" type="range" min="0" max="100" step="1" value="40" />
@@ -138,6 +138,27 @@
     water.position.y = 0;
     water.receiveShadow = true;
     scene.add(water);
+
+    const windParticles = new THREE.Group();
+    scene.add(windParticles);
+
+    // Create particles
+    for (let i = 0; i < 100; i++) {
+      const p = new THREE.Mesh(
+        new THREE.SphereGeometry(0.02, 8, 8),
+        new THREE.MeshBasicMaterial({ color: 0x66d1ff })
+      );
+      p.position.set(Math.random() * 10 - 5, Math.random() * 5 + 1, Math.random() * 10 - 5);
+      windParticles.add(p);
+    }
+      
+    function animateWindParticles() {
+        const dir = new THREE.Vector3(Math.cos(-params.windDirDeg * Math.PI / 180), 0, Math.sin(-params.windDirDeg * Math.PI / 180));
+        windParticles.children.forEach(p => {
+            p.position.addScaledVector(dir, 0.02 * (params.windSpeed / 10));
+            if (p.position.length() > 15) p.position.set(Math.random() * 10 - 5, Math.random() * 5 + 1, Math.random() * 10 - 5);
+        });
+    }
 
     // Boat rig group (origin at mast step)
     const rig = new THREE.Group();
@@ -403,7 +424,7 @@
       // Update wind arrow relative to bow (+X). Positive degrees = starboard.
       windDirGroup.position.set(0, 5, 0);
       windDirGroup.rotation.set(0, 0, 0);
-      windDirGroup.rotation.y = -deg2rad(params.windDirDeg);
+      windDirGroup.rotation.y = deg2rad(-90+params.windDirDeg);
 
       // Compute CE (simple weighted centroid based on camber and twist)
       const ce = computeCE();
@@ -470,6 +491,20 @@
     syncUI();
 
     function animate() {
+      arrow.position.y = 5 + Math.sin(Date.now() * 0.002) * 0.2;
+
+      if (params.windSpeed > 15) {
+        const pos = sail.geometry.attributes.position;
+        for (let i = 0; i < pos.count; i++) {
+          const y = pos.getY(i);
+          const flutter = Math.sin(y * 5 + Date.now() * 0.005) * 0.01;
+          pos.setZ(i, pos.getZ(i) + flutter);
+        }
+        pos.needsUpdate = true;
+      }
+
+      animateWindParticles();
+
       controls.update();
       renderer.render(scene, camera);
       requestAnimationFrame(animate);
