@@ -21,7 +21,7 @@ var Template = function() { return `<?xml version="1.0" encoding="UTF-8" ?>
 	<menuItem wedeoURL="https://netleave.appspot.com/ebc2019player">
 	<title>EBC</title>
 	</menuItem>
-	<menuItem videoURL="https://cdn.nhkworld.jp/www11/nhkworld-tv/domestic/2003459/live.m3u8">
+	<menuItem videoURL="https://masterpl.hls.nhkworld.jp/hls/w/live/master_defaultyes.m3u8">
 	<title>NHK</title>
 	</menuItem>
 	<menuItem videoURL="https://netleave.appspot.com/bbcnewsplayer">
