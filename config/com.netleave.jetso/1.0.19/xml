@@ -1,5 +1,6 @@
 ######### Jetso config #########
-FeedPattern|https://smartbuyerpager.netlify.app/api/getjetso
+#FeedPattern|https://smartbuyerpager.netlify.app/api/getjetso
+FeedPattern|https://smartbuyerpager.appspot.com/getjetso
 FeedIDs|123456
 ddPattern|yyyy-MM-dd HH:mm:ss.SSSSSS
 vaildingPattern|<item>
