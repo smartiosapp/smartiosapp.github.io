@@ -1,5 +1,5 @@
 ######### Jetso config #########
-FeedPattern|https://smartbuyerpager.netlify.app/api/getjetso
+#FeedPattern|https://smartbuyerpager.netlify.app/api/getjetso
 #FeedPattern|https://smartbuyerpager.appspot.com/getjetso
 #FeedPattern|https://smartbuyerpager.netlify.app/images/getjetso.xml
 #FeedPattern|https://smartbuyerpager.netlify.app/api/getjetso.xml
