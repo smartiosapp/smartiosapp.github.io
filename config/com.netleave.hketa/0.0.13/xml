@@ -1,0 +1,8 @@
+Para1|ctl04
+Para2|ctl04
+#PRELOAD|4;新巴;0
+PRELOAD|37B;城巴;0
+PRELOAD|85A;城巴;0
+PRELOAD|89S;九巴;0
+#dir="O"
+PRELOAD|88X;九巴;4
