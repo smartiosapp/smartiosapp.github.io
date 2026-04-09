@@ -183,7 +183,8 @@ var Presenter = {
 //                mediaItem = new MediaItem("video", "https://invidious.f5.si/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
                 mediaItem = new MediaItem("video", "https://votedb.netlify.app/api/"+item.url.replace('/watch?v=', '')+"/gomovie3?server=3&id="+item.url.replace('/watch?v=', ''));
             } else if (idx % 3 === 2) {
-                mediaItem = new MediaItem("video", "https://cal1.iv.ggtyler.dev/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
+//                mediaItem = new MediaItem("video", "https://cal1.iv.ggtyler.dev/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
+                mediaItem = new MediaItem("video", "https://inv.thepixora.com/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
             } else {
 //                mediaItem = new MediaItem("video", "https://inv.nadeko.net/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
 //                mediaItem = new MediaItem("video", "https://inv.ngn.tf/latest_version?id="+item.url.replace('/watch?v=', '')+"&itag=18");
@@ -2192,7 +2193,8 @@ o.drmToken = viutoken;
 //            prdeoURL = 'https://api-piped.mha.fi/channel/'+cyParam
 //            prdeoURL = 'https://piped-api.garudalinux.org/channel/'+cyParam
 //            prdeoURL = 'https://pipedapi.drgns.space/channel/'+cyParam
-            prdeoURL = 'https://pipedapi.orangenet.cc/channel/'+cyParam
+//            prdeoURL = 'https://pipedapi.orangenet.cc/channel/'+cyParam
+            prdeoURL = 'https://api.piped.private.coffee/channel/'+cyParam
             console.log("prdeoURL: "+prdeoURL);
 
             var xhr = new XMLHttpRequest();
