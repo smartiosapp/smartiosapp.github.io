@@ -2317,8 +2317,6 @@ o.drmToken = viutoken;
                     cyParam = cyParam.replace("PLuzP89oyw7OqZtjI6K7HyGWpJS1C1ef2l", "PLJrhvRyNNN2YAozMzb2HfVz2fx-Fsntwj");
                     cyParam = cyParam.replace("PLuzP89oyw7OrcrQ8YmwfUqapBVS0VeEq_", "PLTEZ63IG3yHrwj8KFCvEzIJ3AmyhUB_MS");
                     cyParam = cyParam.replace("PLJrhvRyNNN2b2s10RgcvM2XzZzCZDW-jK", "PL4xaGLze9tKIhfLl15XngUKYotQzUYT7n");
-
-                    cyParam = cyParam.replace("PLJrhvRyNNN2Yn0djCxxU8o9XKLsSjnvR3", "PLzOZ3IKDf6_PB14kPA_f0ZcETqxdITTzR");
                     console.log("ch="+cyParam);
                     console.log("no="+numberParam);
                 } else {
