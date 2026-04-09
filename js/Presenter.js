@@ -2061,6 +2061,8 @@ o.drmToken = viutoken;
             cyParam = cyParam.replace("PLPY0_ooDN1dt-B9om-dPyZ5F7xdDXHmPk", "PLPY0_ooDN1du5dvfnUJW2Y1gxaMXkEtAR");
             cyParam = cyParam.replace("PLzrFT7CrcDKzqJjFo5a4OVmUbW-Iv_g4W", "PLzrFT7CrcDKzdQ1hSVT5LFdMDpRvip3by");
 
+            cyParam = cyParam.replace("PL9B7EAtpveliDh-Bn_EM1P2RgopVSHi-T", "PL9B7EAtpvelh6PH6fXb_fP4kmn5uw7Uut");
+
             console.log("ch="+cyParam);
             
             if(cyParam) {
@@ -2317,8 +2319,6 @@ o.drmToken = viutoken;
                     cyParam = cyParam.replace("PLuzP89oyw7OqZtjI6K7HyGWpJS1C1ef2l", "PLJrhvRyNNN2YAozMzb2HfVz2fx-Fsntwj");
                     cyParam = cyParam.replace("PLuzP89oyw7OrcrQ8YmwfUqapBVS0VeEq_", "PLTEZ63IG3yHrwj8KFCvEzIJ3AmyhUB_MS");
                     cyParam = cyParam.replace("PLJrhvRyNNN2b2s10RgcvM2XzZzCZDW-jK", "PL4xaGLze9tKIhfLl15XngUKYotQzUYT7n");
-
-                    cyParam = cyParam.replace("PL9B7EAtpveliDh-Bn_EM1P2RgopVSHi-T", "PL9B7EAtpvelh6PH6fXb_fP4kmn5uw7Uut");
                     console.log("ch="+cyParam);
                     console.log("no="+numberParam);
                 } else {
