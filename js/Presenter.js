@@ -2072,7 +2072,8 @@ o.drmToken = viutoken;
 //            podeoURL = 'https://piped-api.lunar.icu/playlists/'+cyParam
 //            podeoURL = 'https://pipedapi.adminforge.de/playlists/'+cyParam
 //                podeoURL = 'https://api.piped.yt/playlists/'+cyParam
-                podeoURL = 'https://api.piped.private.coffee/playlists/'+cyParam
+//                podeoURL = 'https://api.piped.private.coffee/playlists/'+cyParam
+                podeoURL = 'https://votedb.netlify.app/api/pipedv1/'+cyParam+'/playlists'
 //            podeoURL = 'https://pipedapi.osphost.fi/playlists/'+cyParam
 //            podeoURL = 'https://api.piped.projectsegfau.lt/playlists/'+cyParam
             console.log("podeoURL: "+podeoURL);
