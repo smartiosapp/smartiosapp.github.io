@@ -267,7 +267,8 @@ var Presenter = {
 			return 'https://olympics.com/tokenGenerator?url=https://ott-dai-oc.akamaized.net/OC1/master.m3u8&domain=https://ott-dai-oc.akamaized.net&_ts=1627107400540';
 		}
         function gennnLink() {
-            return 'https://hkt-mobile-api.nowtv.now.com/09/1/getLiveURL';
+//            return 'https://hkt-mobile-api.nowtv.now.com/09/1/getLiveURL';
+            return 'https://webtvapi.now.com/10/7/getLiveURL';
         }
         function gennnLink2() {
             return 'https://api.viu.now.com/p8/3/getLiveURL';
@@ -1349,9 +1350,9 @@ var Presenter = {
             navigationDocument.presentModal(AJAXtemplate);
 
             var getData = {
-            channelno: "331",
+            channelno: "332",
             mode: "prod",
-            audioCode: "",
+            audioCode: "N",
             format: "HLS",
             callerReferenceNo: "20140702122500"
             };
