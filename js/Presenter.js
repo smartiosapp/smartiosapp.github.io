@@ -1395,6 +1395,172 @@ var Presenter = {
             }
             xhr.send(JSON.stringify(getData));
         }
+        nndeoURL = ele.getAttribute("nndeoURL")
+        if(nndeoURL) {
+            console.log("nndeoURL: "+nndeoURL);
+
+            var resultsemail = "...";
+            var loadingTemplate = '<document><loadingTemplate><activityIndicator><text>Loading'+resultsemail+'</text></activityIndicator></loadingTemplate></document>';
+            var AJAXtemplate = new DOMParser().parseFromString(loadingTemplate, "application/xml");
+            navigationDocument.presentModal(AJAXtemplate);
+
+            var getData = {
+            "callerReferenceNo": "20140702122500",
+            "deviceId": "0",
+            "contentId": "331",
+            "mode": "prod",
+            "deviceType": "IOS_PHONE",
+            "contentType": "Channel"
+            };
+
+            console.log("NN AJAX processing...");
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", gennnLink());
+//            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+            xhr.setRequestHeader('User-Agent', 'Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25');
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+//                    console.log("output: ["+xhr.responseText+"]");
+                    console.log("getU[NN] callback okay!!!");
+                    navigationDocument.dismissModal();
+                    obj = JSON.parse(xhr.responseText);
+                    console.log("result: ["+obj.asset+"]");
+                    console.log("token: ["+obj.drmToken+"]");
+                    viutoken = obj.drmToken;
+
+                    console.log("nnnnURL okay!!!");
+                    var player = new Player();
+                    var playlist = new Playlist();
+//                    var mediaItem = new MediaItem("video", obj.asset);
+                    var mediaItem = new MediaItem("video", obj.asset[0]);
+                    mediaItem.title = 'now Live';
+//                    mediaItem.loadAssetID = getFPSAssetId;
+//                    mediaItem.loadCertificate = getCertificate;
+//                    mediaItem.loadKey = getFPSKey;
+                    mediaItem.loadAssetID = function(url, callback) {
+               console.log('loadAssetID started.')
+                               callback(btoa("8a43d59c-0c98-3850-ab3c-9d6d6e6c8bf5"));
+/*
+                       console.log("===== HERE === ");
+                       var assetID = uri;
+                       if (assetID != null) {
+                           console.log("[FPS]: Successfully parsed asset ID: " + assetID);
+                           callback(assetID.split("skd://")[1]);
+                       } else {
+                           console.log("[FPS]: Error parsing asset ID from URI: " + uri);
+                           callback(null, "Error parsing asset ID from URI: " + uri);
+                       }
+*/
+                           };
+                    mediaItem.loadCertificate = function(url, callback) {
+            var request = new XMLHttpRequest();
+            request.responseType = 'arraybuffer';
+            request.addEventListener('load', function (event) {
+               var request = event.target;
+               console.log("Received cert data: " + request.response);
+//               console.log("uint8Received cert data: " + (new Uint8Array(request.response)));
+//               console.log("Received request: " + request);
+               callback(base64EncodeUint8Array(new Uint8Array(request.response)));
+               console.log('mediaItem.loadCertificate all finished.')
+//               startVideo();
+//               player.play();
+                                                     }, false);
+            request.addEventListener('error', function (event) {
+               console.log('Failed to retrieve the server certificate.')
+                                                     }, false);
+            request.open('GET', 'https://news.now.com/site/new-player/html5player/fairplay.cer', true);
+            request.setRequestHeader('Pragma', 'Cache-Control: no-cache');
+            request.setRequestHeader('User-Agent', 'Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25');
+            request.setRequestHeader("Cache-Control", "max-age=0");
+            request.send();
+            console.log('loadCertificate send finished.')
+/*
+                       console.log("==== Getting the certificate");
+
+                       var certUrl = 'https://static.viu.tv/drm/fairplay-now.cer';
+                       console.log("[FPS] certUrl: " + certUrl);
+                       http.apiRequest(certUrl, "GET", true, "", function(certRequest) {
+                           if (certRequest.status == 200) {
+                               console.log("Received cert data: " + certRequest.responseDataAsBase64);
+                               callback(certRequest.responseDataAsBase64);
+                           } else {
+                               console.log("Error receiving cert data" + certRequest.status);
+                               callback(null, "Got bad response from server: " + certRequest.status);
+                           }
+                       });
+*/
+                           };
+                    mediaItem.loadKey = function(url, requestData, callback) {
+               console.log('loadKey started.')
+            var request = new XMLHttpRequest();
+//            var sessionId = event.sessionId;
+            request.responseType = 'text';
+//            request.session = session;
+            request.addEventListener('load', function (event)
+        {
+            var request = event.target;
+            var session = request.session;
+            keyText = request.responseText.trim();
+//            key = base64DecodeUint8Array(keyText);
+//            session.update(key);
+            callback(keyText, null, null);
+        }, false);
+            request.addEventListener('error', function (event)
+        {
+            console.log('The license request failed.');
+        }, false);
+var o = {};
+o.rawLicenseRequestBase64 = requestData,
+o.contentKID = encodeURIComponent(url.split("skd://")[1]),
+o.drmToken = viutoken;
+            request.open('POST', 'https://fwp.now.com/wrapperFP', true);
+            request.setRequestHeader('User-Agent', 'Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25');
+            request.setRequestHeader("Content-type", "application/json");
+            request.send(JSON.stringify(o));
+/*
+                       console.log("======= [FPS] getting the FPS asset key");
+                       var assetID = uri;
+//                               var postBody = "payload=" + requestData + "&id=" + assetID;
+               // if (fpsToken) postBody += "&fpstoken=" + fpsToken;
+               // fpsToken = null; //reset right away.
+                       var o = {};
+                       o.rawLicenseRequestBase64 = base64EncodeUint8Array(requestData),
+                       o.contentKID = encodeURIComponent(assetID),
+                       o.drmToken = viutoken;
+
+                       var keyUrl = 'https://fwp.nowe.com/wrapperFP';
+//                               console.log("[FPS] keyurl: " + keyUrl + " sending " + postBody);
+                       console.log("[FPS] keyurl: " + keyUrl + " sending " + o);
+
+
+                       httpMgr.apiRequest(keyUrl, "POST", true, o, function(keyRequest) {
+                           if (keyRequest.status == 200) {
+            // The example server implementation wraps the key response blob in
+            // <ckc>...</ckc> tags.  Partners can encode the key response in any
+            // manner they wish.
+                               console.log("======== " + keyRequest);
+                               var response = keyRequest.responseText;
+                               console.log("=============== [FPS]: " + response);
+                               callback(response, null, null);
+                           } else {
+                               console.log("=============== [FPS]: Got bad response from server: " + keyRequest.status);
+                               callback(null, null, "Got bad response from server: " + keyRequest.status);
+                           }
+                       });
+            // callback(keyValue, renewDate, error);
+*/
+                           };
+                    console.log("xxx: ["+mediaItem+"]");
+
+                    player.playlist = playlist;
+                    player.playlist.push(mediaItem);
+                    player.play();
+                    goReport(mediaItem.url, 200);
+                }
+            }
+            xhr.send(JSON.stringify(getData));
+        }
         uldeoURL = ele.getAttribute("uldeoURL")
         if(uldeoURL) {
             console.log("uldeoURL: "+uldeoURL);
