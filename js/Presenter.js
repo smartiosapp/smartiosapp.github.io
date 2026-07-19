@@ -1348,13 +1348,24 @@ var Presenter = {
             var loadingTemplate = '<document><loadingTemplate><activityIndicator><text>Loading'+resultsemail+'</text></activityIndicator></loadingTemplate></document>';
             var AJAXtemplate = new DOMParser().parseFromString(loadingTemplate, "application/xml");
             navigationDocument.presentModal(AJAXtemplate);
-
+/*
             var getData = {
-            channelno: "332",
+            channelno: "331",
             mode: "prod",
-            audioCode: "N",
+            audioCode: "",
             format: "HLS",
             callerReferenceNo: "20140702122500"
+            };
+*/
+
+            var getData = {
+            "callerReferenceNo": "20140702122500",
+            "audioCode": "N",
+            "deviceId": "0",
+            "contentId": "332",
+            "mode": "prod",
+            "deviceType": "IOS_PHONE",
+            "contentType": "Channel"
             };
 
             console.log("NL AJAX processing...");
@@ -1368,12 +1379,12 @@ var Presenter = {
                     console.log("getU[NL] callback okay!!!");
                     navigationDocument.dismissModal();
                     obj = JSON.parse(xhr.responseText);
-                    console.log("result: ["+obj.asset.hls.adaptive+"]");
+                    console.log("result: ["+obj.asset[0]+"]");
 
                     console.log("nnnnURL okay!!!");
                     var player = new Player();
                     var playlist = new Playlist();
-                    var mediaItem = new MediaItem("video", obj.asset.hls.adaptive);
+                    var mediaItem = new MediaItem("video", obj.asset[0]);
                     mediaItem.title = 'now Live';
 
                     player.playlist = playlist;
