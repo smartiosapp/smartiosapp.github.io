@@ -1341,63 +1341,7 @@ var Presenter = {
         }
         nldeoURL = ele.getAttribute("nldeoURL")
         if(nldeoURL) {
-            nldeoURL = gennnLink();
             console.log("nldeoURL: "+nldeoURL);
-
-            var resultsemail = "...";
-            var loadingTemplate = '<document><loadingTemplate><activityIndicator><text>Loading'+resultsemail+'</text></activityIndicator></loadingTemplate></document>';
-            var AJAXtemplate = new DOMParser().parseFromString(loadingTemplate, "application/xml");
-            navigationDocument.presentModal(AJAXtemplate);
-/*
-            var getData = {
-            channelno: "331",
-            mode: "prod",
-            audioCode: "",
-            format: "HLS",
-            callerReferenceNo: "20140702122500"
-            };
-*/
-
-            var getData = {
-            "callerReferenceNo": "20140702122500",
-            "audioCode": "N",
-            "deviceId": "0",
-            "contentId": "332",
-            "mode": "prod",
-            "deviceType": "IOS_PHONE",
-            "contentType": "Channel"
-            };
-
-            console.log("NL AJAX processing...");
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", nldeoURL);
-//            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-            xhr.setRequestHeader('User-Agent', 'Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25');
-            xhr.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-//                    console.log("output: ["+xhr.responseText+"]");
-                    console.log("getU[NL] callback okay!!!");
-                    navigationDocument.dismissModal();
-                    obj = JSON.parse(xhr.responseText);
-                    console.log("result: ["+obj.asset[0]+"]");
-
-                    console.log("nnnnURL okay!!!");
-                    var player = new Player();
-                    var playlist = new Playlist();
-                    var mediaItem = new MediaItem("video", obj.asset[0]);
-                    mediaItem.title = 'now Live';
-
-                    player.playlist = playlist;
-                    player.playlist.push(mediaItem);
-                    player.play();
-                    goReport(mediaItem.url, 200);
-                }
-            }
-            xhr.send(JSON.stringify(getData));
-        }
-        nndeoURL = ele.getAttribute("nndeoURL")
-        if(nndeoURL) {
-            console.log("nndeoURL: "+nndeoURL);
 
             var resultsemail = "...";
             var loadingTemplate = '<document><loadingTemplate><activityIndicator><text>Loading'+resultsemail+'</text></activityIndicator></loadingTemplate></document>';
