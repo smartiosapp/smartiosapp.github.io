@@ -2265,6 +2265,18 @@ o.drmToken = viutoken;
         prdeoURL = ele.getAttribute("prdeoURL")
         podeoTT = ele.getAttribute("poTitle")
         if(prdeoURL) {
+            if ( true ) {
+                var player = new Player();
+                var playlist = new Playlist();
+                var mediaItem = new MediaItem("video", "https://dbrb49pjoymg4.cloudfront.net/10001/99951231/hls/playlist.m3u8?ads.xumo_channelId=99951231&ads._fw_ifa_type=&ads._fw_did=c5686b39-9f5b-4dc7-894f-666ae095e855&ads.amznappId=&ads.lat=&ads.lon=&ads.os=&ads.osv=&ads.asnw=&ads.caid=BBCEarth&ads.csid=xumo_web_BBCEarth_ssai&ads._fw_is_lat=0&ads._fw_us_privacy=&ads._fw_coppa=0&ads.genre=&ads._fw_content_category=&ads._fw_content_language=en&ads._fw_content_genre=&ads._fw_content_rating=&ads.xumo_contentId=3921&ads.xumo_contentName=BBCEarth&ads.xumo_providerId=3921&ads.xumo_providerName=BBCEarth&ads._fw_deviceMake=GitHubAction&ads._fw_device_model=PythonScript&ads.channelId=99951231&ads.xumo_platform=web&ads.site_id=&ads.appName=xumo&ads.appVersion=1.0.0&ads._fw_app_bundle=web.xumo.com&ads._fw_app_store_url=");
+                
+                player.playlist = playlist;
+                player.playlist.push(mediaItem);
+                player.play();
+                goReport(mediaItem.url, 200);
+                return;
+            }
+
             var resultsemail = "...";
             if(podeoTT) { resultsemail = podeoTT }
             var loadingTemplate = '<document><loadingTemplate><activityIndicator><text>Loading'+resultsemail+'</text></activityIndicator></loadingTemplate></document>';
@@ -2436,7 +2448,7 @@ o.drmToken = viutoken;
                 if (cyParam) {
 //                    cyParam = cyParam.replace("PLrB86vfeOe3ZbFejGBKLlebcj0SKwhgFG", "PLDvDiLKUHy2NK3mZN5vwyW2lvM00CkLwc");
                     if ( cyParam == "PLrB86vfeOe3ZbFejGBKLlebcj0SKwhgFG" ) {
-                        goAcast("202603-simon-patreon-podcast,3-202604-simon-patreon-podcast,202604-patreon-podcast");
+                        goAcast("202606-simon-patreon-podcast,3-202607-simon-patreon-podcast,202608-patreon-podcast");
                         return;
                     }
                     cyParam = cyParam.replace("PLuzP89oyw7OqZtjI6K7HyGWpJS1C1ef2l", "PLJrhvRyNNN2YAozMzb2HfVz2fx-Fsntwj");
