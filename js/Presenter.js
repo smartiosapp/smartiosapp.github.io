@@ -505,6 +505,198 @@ var Presenter = {
                 player.play();
             }
         }
+        function goAppleCast(xlsParam) {
+
+            const chParam = xlsParam.split(",");
+
+            var player = new Player();
+            player.addEventListener('mediaItemWillChange', function(event){
+                console.log("change reason:"+event.reason+" currentId:"+getParameterByName('id', event.target.currentMediaItem.url))
+                checkandSkip(event.target.currentMediaItem.url, event.target);
+            });
+            player.addEventListener('stateWillChange', function(event){
+                console.log("event: "+ event.oldState+ "->"+ event.state+ " player:"+ event.target.playbackState);
+//                        console.log(event.target);
+                if (event.state == 'playing' && event.oldState == 'loading') {
+                    setTimeout(function(con,orgURL){
+                        console.log("8s READY to check~~~");
+                        if ( orgURL == con.currentMediaItem.url ) {
+                            if (con.currentMediaItemDuration == 0) {
+                                con.next();
+                            } else {
+                                console.log("READY to play!");
+                            }
+                        } else {
+                            console.log("NOT the same movie!");
+                        }
+                    }.bind(null, player, player.currentMediaItem.url), 8000);
+                }
+            });
+            player.addEventListener('playbackError', function(event){
+                event.target.next();
+                console.log("error with reason:"+event.reason, event);
+            });
+
+            var resultsemail = "...";
+            var loadingTemplate = '<document><loadingTemplate><activityIndicator><text>Loading'+resultsemail+'</text></activityIndicator></loadingTemplate></document>';
+            var AJAXtemplate = new DOMParser().parseFromString(loadingTemplate, "application/xml");
+            navigationDocument.presentModal(AJAXtemplate);
+            
+            var all_items = [];
+
+            console.log("RS AJAX processing...");
+
+            chParam.forEach(function(xlParam, index, array) {
+                console.log("xl="+xlParam);
+                
+                rsdeoURL = genRSLink(xlParam);
+                console.log("rsdeoURL: "+rsdeoURL);
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", rsdeoURL, false);
+//                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+                xhr.setRequestHeader('User-Agent', 'Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25');
+                xhr.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+//                        console.log("output: ["+xhr.responseText+"]");
+                        console.log("getU[RS] callback okay!!!");
+
+                        var sourceText = xhr.responseText;
+                        
+                        const parser = new DOMParser();
+                        const xmlDoc = parser.parseFromString(sourceText, "application/xml");
+
+                        const items = xmlDoc.getElementsByTagName('item');
+                        console.log('Number of <item> elements found:', items.length);
+
+                        if (items.length === 0) {
+                            console.log("No <item> elements found");
+                        } else {
+
+                            var pubArtwork = "";
+
+                            // 1. Extract each <item> block safely (case-insensitive)
+                            const itemRegex = /<item>([\s\S]*?)<\/item>/gi;
+                            const itemss = [...sourceText.matchAll(itemRegex)];
+
+                            console.log("Total <item> tags found:", itemss.length);
+
+                            for (const itemMatch of itemss) {
+                                const itemXml = itemMatch[1]; // The XML string for THIS single item
+
+                                // --- Enclosure (Audio URL) ---
+                                // Supports <enclosure url="..."> OR <media:content url="...">
+                                const urlMatch = itemXml.match(/<(?:enclosure|media:content)[^>]+url=["']([^"']+)["']/i);
+                                
+                                if (!urlMatch) {
+                                    console.log("Skipping item: No audio URL found");
+                                    continue;
+                                }
+
+                                const mediaItem = new MediaItem("audio", urlMatch[1]);
+
+                                // --- Title (Tries <itunes:title> first, falls back to <title>) ---
+                                const titleMatch = itemXml.match(/<(?:itunes:)?title>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/s*(?:itunes:)?title>/i);
+                                if (titleMatch) {
+                                    mediaItem.title = titleMatch[1].trim();
+                                }
+
+                                // --- Subtitle / Summary ---
+                                const summaryMatch = itemXml.match(/<itunes:summary>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/itunes:summary>/i);
+                                if (summaryMatch) {
+                                    mediaItem.subtitle = summaryMatch[1].trim();
+                                }
+
+                                // --- Description ---
+                                const descMatch = itemXml.match(/<description>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/description>/i);
+                                if (descMatch) {
+                                    mediaItem.description = descMatch[1].trim();
+                                }
+
+                                // --- Artwork ---
+                                const imageMatch = itemXml.match(/<itunes:image[^>]+href=["']([^"']+)["']/i);
+                                if (imageMatch) {
+                                    mediaItem.artworkImageURL = imageMatch[1];
+                                    pubArtwork = imageMatch[1];
+                                } else {
+                                    mediaItem.artworkImageURL = pubArtwork;
+                                }
+
+                                // --- Duration ---
+                                const durationMatch = itemXml.match(/<itunes:duration>(.*?)<\/itunes:duration>/i);
+                                if (durationMatch) {
+                                    const rawDuration = durationMatch[1].trim();
+
+                                    if (rawDuration.includes(":")) {
+                                        const parts = rawDuration.split(":").map(Number);
+                                        let totalSeconds = 0;
+
+                                        if (parts.length === 2) {
+                                            // mm:ss format
+                                            const [minutes, seconds] = parts;
+                                            totalSeconds = (minutes * 60) + seconds;
+                                        } else if (parts.length === 3) {
+                                            // hh:mm:ss format
+                                            const [hours, minutes, seconds] = parts;
+                                            totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
+                                        }
+                                        mediaItem.duration = totalSeconds;
+                                    } else {
+                                        // Raw seconds format
+                                        mediaItem.duration = parseInt(rawDuration, 10) || 0;
+                                    }
+                                }
+
+                                // --- Publication Date (+8 Hours / UTC Offset Formatting) ---
+                                const pubDateMatch = itemXml.match(/<pubDate>(.*?)<\/pubDate>/i);
+                                if (pubDateMatch) {
+                                    const dateStr = pubDateMatch[1].trim();
+                                    const date = new Date(dateStr);
+
+                                    if (!isNaN(date.getTime())) {
+                                        // Add 8 hours (8 * 60 * 60 * 1000 ms)
+                                        const targetTime = new Date(date.getTime() + (8 * 60 * 60 * 1000));
+
+                                        const day = String(targetTime.getUTCDate()).padStart(2, '0');
+                                        const month = String(targetTime.getUTCMonth() + 1).padStart(2, '0');
+                                        const year = targetTime.getUTCFullYear();
+                                        const hours = String(targetTime.getUTCHours()).padStart(2, '0');
+                                        const minutes = String(targetTime.getUTCMinutes()).padStart(2, '0');
+                                        const seconds = String(targetTime.getUTCSeconds()).padStart(2, '0');
+
+                                        mediaItem.addDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+                                    }
+                                }
+
+                                all_items.push(mediaItem);
+                            }
+
+                            console.log("Successfully parsed items:", all_items.length);
+                        }
+                    }
+                }
+                xhr.send();
+            });
+
+            function parseDate(dateStr) {
+              return new Date(dateStr.replace(' ', 'T') + 'Z');
+            };
+
+            all_items.sort(function(a, b){
+                return parseDate(b.addDate) - parseDate(a.addDate);
+            });
+
+            var playlist = new Playlist();
+            player.playlist = playlist;
+            all_items.forEach(addAcast, player.playlist);
+            console.log("Playlist items: " + player.playlist.length);
+
+            navigationDocument.dismissModal();
+
+            if (player.playlist.length>0) {
+                player.play();
+            }
+        }
         function goReport(myParamURL, myParamStatus) {
             console.log("report AJAX processing...");
             var getData = {
@@ -1909,19 +2101,21 @@ o.drmToken = viutoken;
         if(wadeoURL) {
             console.log("wadeoURL: "+wadeoURL);
             if ( wadeoURL == "https://netleave.appspot.com/s1Live" ) {
-                goAcast("initium-reports");
+                goAppleCast("https://podcasts.files.bbci.co.uk/p02nq0gn.rss");
                 return;
             }
             if ( wadeoURL == "https://netleave.appspot.com/s2Live" ) {
-                goAcast("c-featre");
+//                goAcast("c-featre");
+                goAcast("initium-reports");
                 return;
             }
             if ( wadeoURL == "https://netleave.appspot.com/greenbean" ) {
-                goAcast("1-202606-sinic-podcast,1-202607-sinic-podcast");
+                goAppleCast("https://anchor.fm/s/e89e5780/podcast/rss");
                 return;
             }
             if ( wadeoURL == "https://netleave.appspot.com/windLive" ) {
-                goAcast("two-minute-briefing");
+//                goAcast("two-minute-briefing");
+                goAcast("1-202606-sinic-podcast,1-202607-sinic-podcast");
                 return;
             }
             if(getDomain(wadeoURL, true)=="netleave.appspot.com") {
