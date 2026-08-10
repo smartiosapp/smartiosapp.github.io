@@ -292,6 +292,9 @@ var Presenter = {
 			return 'http://geoblock-akamai.rthk.hk.edgesuite.net/apps/tvapp/feeds_v3.php?language=zh&action=retrieveepisodedetail&episodeid='+yl;
 		}
         function genRSLink(xl) {
+            if (xl.startsWith('https://')) {
+                return xl;
+            }
             return 'https://feeds.acast.com/public/shows/'+xl;
         }
         function geniLink() {
