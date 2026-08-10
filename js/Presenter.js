@@ -1916,6 +1916,14 @@ o.drmToken = viutoken;
                 goAcast("c-featre");
                 return;
             }
+            if ( wadeoURL == "https://netleave.appspot.com/greenbean" ) {
+                goAcast("1-202606-sinic-podcast,1-202607-sinic-podcast");
+                return;
+            }
+            if ( wadeoURL == "https://netleave.appspot.com/windLive" ) {
+                goAcast("two-minute-briefing");
+                return;
+            }
             if(getDomain(wadeoURL, true)=="netleave.appspot.com") {
 /*
                 var cyParam = getParameterByName('ch', uideoURL);
