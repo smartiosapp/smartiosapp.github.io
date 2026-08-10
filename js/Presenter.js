@@ -563,23 +563,23 @@ var Presenter = {
 
                         var sourceText = xhr.responseText;
                         
-                        const parser = new DOMParser();
-                        const xmlDoc = parser.parseFromString(sourceText, "application/xml");
+//                        const parser = new DOMParser();
+//                        const xmlDoc = parser.parseFromString(sourceText, "application/xml");
+//
+//                        const items = xmlDoc.getElementsByTagName('item');
+//                        console.log('Number of <item> elements found:', items.length);
 
-                        const items = xmlDoc.getElementsByTagName('item');
-                        console.log('Number of <item> elements found:', items.length);
+                        // 1. Extract each <item> block safely (case-insensitive)
+                        const itemRegex = /<item>([\s\S]*?)<\/item>/gi;
+                        const itemss = [...sourceText.matchAll(itemRegex)];
 
-                        if (items.length === 0) {
+                        console.log("Total <item> tags found:", itemss.length);
+
+                        if (itemss.length === 0) {
                             console.log("No <item> elements found");
                         } else {
 
                             var pubArtwork = "";
-
-                            // 1. Extract each <item> block safely (case-insensitive)
-                            const itemRegex = /<item>([\s\S]*?)<\/item>/gi;
-                            const itemss = [...sourceText.matchAll(itemRegex)];
-
-                            console.log("Total <item> tags found:", itemss.length);
 
                             for (const itemMatch of itemss) {
                                 const itemXml = itemMatch[1]; // The XML string for THIS single item
