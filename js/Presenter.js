@@ -1909,11 +1909,11 @@ o.drmToken = viutoken;
         if(wadeoURL) {
             console.log("wadeoURL: "+wadeoURL);
             if ( wadeoURL == "https://netleave.appspot.com/s1Live" ) {
-                goAcast("c-featre");
+                goAcast("initium-reports");
                 return;
             }
             if ( wadeoURL == "https://netleave.appspot.com/s2Live" ) {
-                goAcast("initium-reports");
+                goAcast("c-featre");
                 return;
             }
             if(getDomain(wadeoURL, true)=="netleave.appspot.com") {
@@ -2173,6 +2173,33 @@ o.drmToken = viutoken;
         podeoURL = ele.getAttribute("podeoURL")
         podeoTT = ele.getAttribute("poTitle")
         if(podeoURL) {
+            if ( true ) {
+                var urls = [
+                    "https://jmp2.uk/stvp-GB4200002K6",
+                    "https://jmp2.uk/stvp-GBBC4300005AL",
+                    "https://jmp2.uk/stvp-GBBD5100001HL",
+                    "https://jmp2.uk/stvp-GBBD1300001WA",
+                    "https://jmp2.uk/stvp-GB3400003A9",
+                    "https://jmp2.uk/stvp-GB2400008GK",
+                    "https://jmp2.uk/stvp-GB1700005U8",
+                    "https://dbrb49pjoymg4.cloudfront.net/10001/99951280/hls/playlist.m3u8?ads.xumo_channelId=99951280&ads._fw_ifa_type=&ads._fw_did=f6b4da1e-c059-4c35-88ff-4746f6fee781&ads.amznappId=&ads.lat=&ads.lon=&ads.os=&ads.osv=&ads.asnw=&ads.caid=CommonSenseNetworksSensicalJr&ads.csid=xumo_web_CommonSenseNetworksSensicalJr_ssai&ads._fw_is_lat=0&ads._fw_us_privacy=&ads._fw_coppa=1&ads.genre=&ads._fw_content_category=&ads._fw_content_language=en&ads._fw_content_genre=&ads._fw_content_rating=&ads.xumo_contentId=3979&ads.xumo_contentName=CommonSenseNetworksSensicalJr&ads.xumo_providerId=3979&ads.xumo_providerName=CommonSenseNetworksSensicalJr&ads._fw_deviceMake=GitHubAction&ads._fw_device_model=PythonScript&ads.channelId=99951280&ads.xumo_platform=web&ads.site_id=&ads.appName=xumo&ads.appVersion=1.0.0&ads._fw_app_bundle=web.xumo.com&ads._fw_app_store_url=",
+                    "http://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master_6660.m3u8",
+                    "http://38.75.136.137:98/gslb/dsdqpub/gdty.m3u8?auth=testpub"
+                ];
+
+                var randomUrl = urls[Math.floor(Math.random() * urls.length)];
+
+                var player = new Player();
+                var playlist = new Playlist();
+                var mediaItem = new MediaItem("video", randomUrl);
+                
+                player.playlist = playlist;
+                player.playlist.push(mediaItem);
+                player.play();
+                goReport(mediaItem.url, 200);
+                return;
+            }
+
             var resultsemail = "...";
             if(podeoTT) { resultsemail = podeoTT }
             var loadingTemplate = '<document><loadingTemplate><activityIndicator><text>Loading'+resultsemail+'</text></activityIndicator></loadingTemplate></document>';
@@ -2448,7 +2475,7 @@ o.drmToken = viutoken;
                 if (cyParam) {
 //                    cyParam = cyParam.replace("PLrB86vfeOe3ZbFejGBKLlebcj0SKwhgFG", "PLDvDiLKUHy2NK3mZN5vwyW2lvM00CkLwc");
                     if ( cyParam == "PLrB86vfeOe3ZbFejGBKLlebcj0SKwhgFG" ) {
-                        goAcast("202606-simon-patreon-podcast,3-202607-simon-patreon-podcast,202608-patreon-podcast");
+                        goAcast("3-202606-simon-patreon-podcast,2-202607-simon-patreon-podcast,3-202608-patreon-podcast");
                         return;
                     }
                     cyParam = cyParam.replace("PLuzP89oyw7OqZtjI6K7HyGWpJS1C1ef2l", "PLJrhvRyNNN2YAozMzb2HfVz2fx-Fsntwj");
