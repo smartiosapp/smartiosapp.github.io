@@ -1055,7 +1055,10 @@ var Presenter = {
 //                            console.log("movielink.length="+movielink.length+"");
 
 //                            if ( suggestedMovielink == '' ) {
-                            if ( !suggestedMovielink.startsWith("http") ) {
+                            if (suggestedMovielink.trim().startsWith("#EXTM3U")) {
+                                var b64 = btoa(unescape(encodeURIComponent(suggestedMovielink)));
+                                suggestedMovielink = "data:application/vnd.apple.mpegurl;base64," + b64;
+                            } else if ( !suggestedMovielink.startsWith("http") ) {
                                         var loadingTemplate1 = '<document><alertTemplate><title>Video has some issue, please try again.</title><description>Code: 999</description><button><text>OK</text></button></alertTemplate></document>'
                                         var AJAXtemplate1 = new DOMParser().parseFromString(loadingTemplate1, "application/xml");
                                         navigationDocument.presentModal(AJAXtemplate1);
