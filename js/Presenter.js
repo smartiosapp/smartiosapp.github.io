@@ -291,6 +291,12 @@ var Presenter = {
 		function genRTLink2(yl) {
 			return 'http://geoblock-akamai.rthk.hk.edgesuite.net/apps/tvapp/feeds_v3.php?language=zh&action=retrieveepisodedetail&episodeid='+yl;
 		}
+        function genRT2026Link1(xl) {
+            return 'https://apip01.rthk.hk/apps/otg3in1/feeds.php?action=tv_getprogramdetail&programid='+xl;
+        }
+        function genRT2026Link2(yl) {
+            return 'https://api01.rthk.hk/apps/otg3in1/feeds.php?action=tv_retrieveepisodedetail&episodeid='+yl+'&language=zh';
+        }
         function genRSLink(xl) {
             if (xl.startsWith('https://')) {
                 return xl;
@@ -1276,11 +1282,11 @@ var Presenter = {
 	    player.play();
         goReport(mediaItem.url, 200);
   	}
-        rtdeoURL = ele.getAttribute("rtdeoURL")
-        if(rtdeoURL) {
-            var xlParam = getParameterByName('xl', rtdeoURL);
+        rtdeoURL2024 = ele.getAttribute("rtdeoURL2024")
+        if(rtdeoURL2024) {
+            var xlParam = getParameterByName('xl', rtdeoURL2024);
             
-            xlParam = xlParam.replace("9444", "11552");
+//            xlParam = xlParam.replace("9444", "11552");
             xlParam = xlParam.replace("866", "11507");
             xlParam = xlParam.replace("9710", "11526");
             xlParam = xlParam.replace("9593", "11452");
@@ -1293,9 +1299,14 @@ var Presenter = {
                 goAppleCast(genRTLink("hongkongconnection_i.xml"));
                 return;
             }
+            if ( xlParam == "9444" ) {
+                goAppleCast(genRTLink("Free_as_the_wind.xml"));
+                return;
+            }
 
-            rtdeoURL = genRTLink1(xlParam);
-            console.log("rtdeoURL: "+rtdeoURL);
+
+            rtdeoURL2024 = genRTLink1(xlParam);
+            console.log("rtdeoURL2024: "+rtdeoURL2024);
 
             var resultsemail = "...";
             var loadingTemplate = '<document><loadingTemplate><activityIndicator><text>Loading'+resultsemail+'</text></activityIndicator></loadingTemplate></document>';
@@ -1304,7 +1315,7 @@ var Presenter = {
             
             console.log("RT AJAX processing...");
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", rtdeoURL, true);
+            xhr.open("GET", rtdeoURL2024, true);
 //            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
             xhr.setRequestHeader('User-Agent', 'tv-ios/214.20161215 CFNetwork/887 Darwin/17.0.0');
             xhr.onreadystatechange = function () {
@@ -1337,12 +1348,12 @@ var Presenter = {
                             console.log( `Found ${result[1]} at ${result.index}` );
                             console.log("another link reach!");
 						}
-						rtdeoURL = genRTLink2(result[1]);
-						console.log("rtdeoURL: "+rtdeoURL);
+						rtdeoURL2024 = genRTLink2(result[1]);
+						console.log("rtdeoURL2024: "+rtdeoURL2024);
 						
 						console.log("RT AJAX processing...");
 						var xhrEpisode = new XMLHttpRequest();
-						xhrEpisode.open("GET", rtdeoURL, true);
+						xhrEpisode.open("GET", rtdeoURL2024, true);
 //						xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
 						xhrEpisode.setRequestHeader('User-Agent', 'tv-ios/214.20161215 CFNetwork/887 Darwin/17.0.0');
 						xhrEpisode.onreadystatechange = function () {
@@ -1382,64 +1393,110 @@ var Presenter = {
 						}
 						xhrEpisode.send();
 					}
-					/*
-                    var uoTV = xhr.responseText.match(/\<title\>([^\<]+)\<\/title\>/);
-                    if (uoTV) {
-                        console.log("TITLE: "+uoTV[1]);
-                    }
-                    if (result = (/<guid>(.*)<\/guid>/gi).exec(xhr.responseText)) {
-                        console.log( `Found ${result[1]} at ${result.index}` );
-                        // shows: Found JavaScript at 12, then:
-                        // shows: Found javascript at 34
-                        var player = new Player();
-                        var playlist = new Playlist();
-                        var mediaItem = new MediaItem("video", result[1]);
-                        if (uoTV) {
-                            mediaItem.title = uoTV[1];
-                        }
-
-                        player.playlist = playlist;
-                        player.playlist.push(mediaItem);
-                        player.play();
-                    }
-					 */
-//                    console.log("result: ["+res+"]");
-
-/*                    if (xhr.responseText.match( /https:/gi ) > -1 ) {
-                        var res = str.match(/a(i)n/gi);
-                        document.getElementById("demo").innerHTML = res[0][2];
-                    }
-                    var x, i, xmlDoc, txt;
-                    xmlDoc = xhr.responseXML;
-                    var parser = new DOMParser();
-                    xmlDoc = parser.parseFromString(xhr.responseText,"text/xml");
-                    txt = "";
-                    x = xmlDoc.getElementsByTagName("TITLE");
-                    for (i = 0; i< x.length; i++) {
-                        txt += x[i].childNodes[0].nodeValue + "<br>";
-                    }
-                    console.log(txt);
- */
-/*                    var xmlDoc = xhr.responseXML;
-                    var x = xmlDoc.getElementsByTagName("ARTIST");
-                    for (i = 0; i < x.length; i++) {
-                        console.log("result["+i+"]: "+x[i].childNodes[0].nodeValue);
-                    }
- */
-//                    myFunction(this);
-                    /*
-                    console.log("iiiiURL okay!!!");
-                    var player = new Player();
-                    var playlist = new Playlist();
-                    var mediaItem = new MediaItem("video", obj.result.stream);
-                    mediaItem.title = 'i-CABLE News';
-                    
-                    player.playlist = playlist;
-                    player.playlist.push(mediaItem);
-                    player.play();
-                     */
                 }
             }
+            xhr.send();
+        }
+        rtdeoURL = ele.getAttribute("rtdeoURL");
+        if (rtdeoURL) {
+            var xlParam = getParameterByName('xl', rtdeoURL);
+
+            // xlParam replacements
+            xlParam = xlParam.replace("9444", "12029");
+            xlParam = xlParam.replace("866", "12350");
+            xlParam = xlParam.replace("9710", "11825");
+            xlParam = xlParam.replace("9593", "9265");
+            xlParam = xlParam.replace("9866", "11199");
+            xlParam = xlParam.replace("912350", "12324");
+            xlParam = xlParam.replace("9427", "9713");
+
+            console.log("xl=" + xlParam);
+
+            rtdeoURL = genRT2026Link1(xlParam);
+            console.log("rtdeoURL: " + rtdeoURL);
+
+            var resultsemail = "...";
+            var loadingTemplate = '<document><loadingTemplate><activityIndicator><text>Loading' + resultsemail + '</text></activityIndicator></loadingTemplate></document>';
+            var AJAXtemplate = new DOMParser().parseFromString(loadingTemplate, "application/xml");
+            navigationDocument.presentModal(AJAXtemplate);
+
+            console.log("RT AJAX processing...");
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", rtdeoURL, true);
+            xhr.setRequestHeader('User-Agent', 'RTHK%20On%20The%20Go/266 CFNetwork/3860.200.71 Darwin/25.1.0');
+
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log("getU[RT] callback okay!!!");
+                    navigationDocument.dismissModal();
+
+                    try {
+                        var responseData = JSON.parse(xhr.responseText);
+                        var now = Math.floor(Date.now() / 1000);
+
+                        // Assuming responseData contains an array of episodes/items
+                        // Adjust property names (e.g., responseData.episodes or responseData.items) as needed based on your API structure
+                        var episodes = Array.isArray(responseData) ? responseData : (responseData.programDetail.programItem.episodeItemList.episodeItem || responseData.episodes || responseData.items || []);
+
+                        // Find the first episode that has already aired (firstRunTime <= now)
+                        var validEpisode = episodes.find(function(ep) {
+                            return ep.firstRunTime && Number(ep.firstRunTime) <= now;
+                        }) || episodes[0]; // Fallback to first item if none matched
+
+                        if (validEpisode && validEpisode.episodeId) {
+                            console.log("Found episodeId: " + validEpisode.episodeId);
+                            
+                            var episodeURL = genRT2026Link2(validEpisode.episodeId);
+                            console.log("rtdeoURL: " + episodeURL);
+
+                            console.log("RT AJAX processing episode...");
+                            var xhrEpisode = new XMLHttpRequest();
+                            xhrEpisode.open("GET", episodeURL, true);
+                            xhrEpisode.setRequestHeader('User-Agent', 'RTHK%20On%20The%20Go/266 CFNetwork/3860.200.71 Darwin/25.1.0');
+
+                            xhrEpisode.onreadystatechange = function () {
+                                if (this.readyState == 4 && this.status == 200) {
+                                    try {
+                                        var epData = JSON.parse(xhrEpisode.responseText);
+                                        
+                                        // Adjust property path to match your JSON structure (e.g., epData.streamVideoLink or epData.result.stream)
+                                        var videoLink = epData.episodeDetail.episodeItem.streamVideoLink || epData.streamUrl || epData.result?.stream;
+
+                                        if (videoLink) {
+                                            console.log("Found stream link: " + videoLink);
+
+                                            var player = new Player();
+                                            var playlist = new Playlist();
+                                            var mediaItem = new MediaItem("video", videoLink);
+
+                                            // Mapping JSON metadata fields
+                                            if (epData.episodeDetail.episodeItem.programName) mediaItem.title = epData.episodeDetail.episodeItem.programName;
+                                            if (epData.episodeDetail.episodeItem.episodeName) mediaItem.subtitle = epData.episodeDetail.episodeItem.episodeName;
+                                            if (epData.episodeDetail.episodeItem.description) mediaItem.description = epData.episodeDetail.episodeItem.description;
+                                            if (epData.episodeDetail.episodeItem.episodeImageSmall) mediaItem.artworkImageURL = epData.episodeDetail.episodeItem.episodeImageSmall;
+
+                                            player.playlist = playlist;
+                                            player.playlist.push(mediaItem);
+                                            player.play();
+
+                                            goReport(mediaItem.url, 200);
+                                        } else {
+                                            console.log("Error: Stream link not found in JSON.");
+                                        }
+                                    } catch (e) {
+                                        console.log("Error parsing Episode JSON: " + e.message);
+                                    }
+                                }
+                            };
+                            xhrEpisode.send();
+                        } else {
+                            console.log("Error: No valid episodeId found in JSON response.");
+                        }
+                    } catch (e) {
+                        console.log("Error parsing initial JSON: " + e.message);
+                    }
+                }
+            };
             xhr.send();
         }
         hideoURL = ele.getAttribute("hideoURL")
