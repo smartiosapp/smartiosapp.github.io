@@ -283,7 +283,7 @@ var Presenter = {
             return 'https://mobileapp.i-cable.com/iCableMobile/API/api.php?cate_id=2&method=getContentList';
         }
         function genRTLink(xl) {
-            return 'http://podcast.rthk.hk/podcast/'+xl;
+            return 'https://podcast.rthk.hk/podcast/'+xl;
         }
 		function genRTLink1(xl) {
 			return 'http://programme.rthk.hk/apps/tvapp/feeds_v3.php?language=zh&action=retrieveprogramdetail&programid='+xl;
@@ -1287,8 +1287,12 @@ var Presenter = {
             xlParam = xlParam.replace("9866", "11199");
             xlParam = xlParam.replace("9427", "9713");
 
-
             console.log("xl="+xlParam);
+
+            if ( xlParam == "858" ) {
+                goAppleCast(genRTLink("hongkongconnection_i.xml"));
+                return;
+            }
 
             rtdeoURL = genRTLink1(xlParam);
             console.log("rtdeoURL: "+rtdeoURL);
