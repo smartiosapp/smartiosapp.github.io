@@ -980,6 +980,8 @@ var Presenter = {
         function goIn2AppUT(myParamURL, uideoURL, uideoTitle) {
             console.log("MV AJAX processing...");
 
+            uideoURL = uideoURL.replace("https://netleave.appspot.com/utubeplayer", "https://netleave.netlify.app/api/net/utubeplayer");
+
             Date.prototype.yyyymmdd = function() {
                 var mm = this.getMonth() + 1; // getMonth() is zero-based
                 var dd = this.getDate();
