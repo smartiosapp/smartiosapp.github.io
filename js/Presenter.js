@@ -2746,7 +2746,7 @@ o.drmToken = viutoken;
                 if (cyParam) {
 //                    cyParam = cyParam.replace("PLrB86vfeOe3ZbFejGBKLlebcj0SKwhgFG", "PLDvDiLKUHy2NK3mZN5vwyW2lvM00CkLwc");
                     if ( cyParam == "PLrB86vfeOe3ZbFejGBKLlebcj0SKwhgFG" ) {
-                        goAcast("3-202606-simon-patreon-podcast,2-202607-simon-patreon-podcast,3-202608-patreon-podcast");
+                        goAcast("3-202606-simon-patreon-podcast,2-202607-simon-patreon-podcast,202608simon");
                         return;
                     }
                     cyParam = cyParam.replace("PLuzP89oyw7OqZtjI6K7HyGWpJS1C1ef2l", "PLJrhvRyNNN2YAozMzb2HfVz2fx-Fsntwj");
