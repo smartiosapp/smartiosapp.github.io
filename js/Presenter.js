@@ -611,7 +611,15 @@ var Presenter = {
                                     continue;
                                 }
 
-                                const mediaItem = new MediaItem("audio", urlMatch[1]);
+//                                const mediaItem = new MediaItem("audio", urlMatch[1]);
+                                let audioUrl = urlMatch[1];
+
+                                // Strip query parameters ONLY for SBS Podcast streams
+                                if (audioUrl.includes("sbs-podcast.streamguys1.com")) {
+                                    audioUrl = audioUrl.split('?')[0];
+                                }
+
+                                const mediaItem = new MediaItem("audio", audioUrl);
 
                                 // --- Title (Tries <itunes:title> first, falls back to <title>) ---
                                 const titleMatch = itemXml.match(/<(?:itunes:)?title>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/s*(?:itunes:)?title>/i);
