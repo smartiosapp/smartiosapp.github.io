@@ -2584,11 +2584,11 @@ o.drmToken = viutoken;
             let text = "How are you doing today?";
 
             if ( cysParam == "UCVZTkv6LM-_xWUM9t-jS5JA,UCjZL1_t_U0zfIwHKyWY8NTw,UC-nf2NPnA3RXOZcw0KBmGfA,UCETuQf4lzTrfevoHdSGo8Ew,UCBbTnorwzva0ZIMGW0ttwVA" ) {
-                goAppleCast("https://anchor.fm/s/10ba5be30/podcast/rss");
+                goAppleCast("https://anchor.fm/s/10ba5be30/podcast/rss,https://feeds.soundon.fm/podcasts/e0e275d9-9a69-49c2-8c16-cbdfb914e9e7.xml,https://feeds.sbs.com.au/global-finance,https://anchor.fm/s/f380feb4/podcast/rss,https://anchor.fm/s/f1f4c3f0/podcast/rss");
                 return;
             }
             if ( cysParam == "UCNAqBC6Z1HkymQ7gkG0pCOg,UCnixWoic7ATGI0AZ2LrtJ7Q,UCrZG5sGryxwgSDQSlHgmZTw,UCm5oNp5xqr4CdtU9L7ZrsKg,UCqhS6bcbMX5AtiM9dedFiYQ,UC8u_Mgs-48ZdtP67b4CYfewi,UCZXZcgbA7iajsWdPsAzJ40A" ) {
-                goAppleCast("https://anchor.fm/s/74afc188/podcast/rss,https://www.ic975.com/feed/creativecaptain/");
+                goAppleCast("http://feeds.feedburner.com/hkpug_podcast,https://anchor.fm/s/42975bd4/podcast/rss,https://feeds.sbs.com.au/technology-world");
                 return;
             }
             if ( true ) {
