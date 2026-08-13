@@ -2447,8 +2447,26 @@ o.drmToken = viutoken;
         podeoURL = ele.getAttribute("podeoURL")
         podeoTT = ele.getAttribute("poTitle")
         if(podeoURL) {
+            var resultsemail = "...";
+            if(podeoTT) { resultsemail = podeoTT }
+            var loadingTemplate = '<document><loadingTemplate><activityIndicator><text>Loading'+resultsemail+'</text></activityIndicator></loadingTemplate></document>';
+            var AJAXtemplate = new DOMParser().parseFromString(loadingTemplate, "application/xml");
+            navigationDocument.presentModal(AJAXtemplate);
+            
+            var cyParam = getParameterByName('ch', podeoURL);
+            cyParam = cyParam.replace("PLPY0_ooDN1dt-B9om-dPyZ5F7xdDXHmPk", "PLPY0_ooDN1du5dvfnUJW2Y1gxaMXkEtAR");
+//            cyParam = cyParam.replace("PLzrFT7CrcDKzqJjFo5a4OVmUbW-Iv_g4W", "PLzrFT7CrcDKzdQ1hSVT5LFdMDpRvip3by");
+
+            cyParam = cyParam.replace("PL9B7EAtpveliDh-Bn_EM1P2RgopVSHi-T", "PL9B7EAtpvelh6PH6fXb_fP4kmn5uw7Uut");
+
+            console.log("ch="+cyParam);
+            
             if ( cyParam == "PLzrFT7CrcDKzqJjFo5a4OVmUbW-Iv_g4W" ) {
                 goAppleCast("https://anchor.fm/s/10b505a6c/podcast/rss");
+                return;
+            }
+            if ( cyParam == "PLREP4w7CgoPRaLVLtx9GxwEgn_t8fz9hq" ) {
+                goAppleCast("https://anchor.fm/s/10ba5be30/podcast/rss");
                 return;
             }
             if ( true ) {
@@ -2478,20 +2496,6 @@ o.drmToken = viutoken;
                 return;
             }
 
-            var resultsemail = "...";
-            if(podeoTT) { resultsemail = podeoTT }
-            var loadingTemplate = '<document><loadingTemplate><activityIndicator><text>Loading'+resultsemail+'</text></activityIndicator></loadingTemplate></document>';
-            var AJAXtemplate = new DOMParser().parseFromString(loadingTemplate, "application/xml");
-            navigationDocument.presentModal(AJAXtemplate);
-            
-            var cyParam = getParameterByName('ch', podeoURL);
-            cyParam = cyParam.replace("PLPY0_ooDN1dt-B9om-dPyZ5F7xdDXHmPk", "PLPY0_ooDN1du5dvfnUJW2Y1gxaMXkEtAR");
-            cyParam = cyParam.replace("PLzrFT7CrcDKzqJjFo5a4OVmUbW-Iv_g4W", "PLzrFT7CrcDKzdQ1hSVT5LFdMDpRvip3by");
-
-            cyParam = cyParam.replace("PL9B7EAtpveliDh-Bn_EM1P2RgopVSHi-T", "PL9B7EAtpvelh6PH6fXb_fP4kmn5uw7Uut");
-
-            console.log("ch="+cyParam);
-            
             if(cyParam) {
 //            podeoURL = 'https://inv.riverside.rocks/api/v1/playlists/'+cyParam
 //            podeoURL = 'https://pipedapi.tokhmi.xyz/playlists/'+cyParam
