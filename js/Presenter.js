@@ -593,6 +593,12 @@ var Presenter = {
 
                             var pubArtwork = "";
 
+                            const pubArtMatch = sourceText.match(/<itunes:image[^>]+href=["']([^"']+)["']/i);
+
+                            if (pubArtMatch && pubArtMatch[1]) {
+                                pubArtwork = pubArtMatch[1];
+                            }
+                            
                             for (const itemMatch of itemss) {
                                 const itemXml = itemMatch[1]; // The XML string for THIS single item
 
@@ -2588,7 +2594,7 @@ o.drmToken = viutoken;
                 return;
             }
             if ( cysParam == "UCNAqBC6Z1HkymQ7gkG0pCOg,UCnixWoic7ATGI0AZ2LrtJ7Q,UCrZG5sGryxwgSDQSlHgmZTw,UCm5oNp5xqr4CdtU9L7ZrsKg,UCqhS6bcbMX5AtiM9dedFiYQ,UC8u_Mgs-48ZdtP67b4CYfewi,UCZXZcgbA7iajsWdPsAzJ40A" ) {
-                goAppleCast("http://feeds.feedburner.com/hkpug_podcast,https://anchor.fm/s/42975bd4/podcast/rss,https://feeds.sbs.com.au/technology-world");
+                goAppleCast("https://feeds.feedburner.com/hkpug_podcast,https://anchor.fm/s/42975bd4/podcast/rss,https://feeds.sbs.com.au/technology-world");
                 return;
             }
             if ( true ) {
