@@ -515,6 +515,9 @@ var Presenter = {
             }
         }
         function goAppleCast(xlsParam) {
+            
+//            Please lookup from that: https://itunes.apple.com/lookup?id=1586819833
+//            json: information on feedUrl
 
             const chParam = xlsParam.split(",");
 
@@ -2747,6 +2750,10 @@ o.drmToken = viutoken;
 //                    cyParam = cyParam.replace("PLrB86vfeOe3ZbFejGBKLlebcj0SKwhgFG", "PLDvDiLKUHy2NK3mZN5vwyW2lvM00CkLwc");
                     if ( cyParam == "PLrB86vfeOe3ZbFejGBKLlebcj0SKwhgFG" ) {
                         goAcast("3-202606-simon-patreon-podcast,2-202607-simon-patreon-podcast,202608simon");
+                        return;
+                    }
+                    if ( cyParam == "PLzrFT7CrcDKzqJjFo5a4OVmUbW-Iv_g4W" ) {
+                        goAppleCast("https://anchor.fm/s/10b505a6c/podcast/rss");
                         return;
                     }
                     cyParam = cyParam.replace("PLuzP89oyw7OqZtjI6K7HyGWpJS1C1ef2l", "PLJrhvRyNNN2YAozMzb2HfVz2fx-Fsntwj");
