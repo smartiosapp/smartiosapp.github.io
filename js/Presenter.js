@@ -2583,11 +2583,11 @@ o.drmToken = viutoken;
             var cysParam = getParameterByName('ch', prdeoURL);
             let text = "How are you doing today?";
 
-            if ( cyParam == "UCVZTkv6LM-_xWUM9t-jS5JA,UCjZL1_t_U0zfIwHKyWY8NTw,UC-nf2NPnA3RXOZcw0KBmGfA,UCETuQf4lzTrfevoHdSGo8Ew,UCBbTnorwzva0ZIMGW0ttwVA" ) {
+            if ( cysParam == "UCVZTkv6LM-_xWUM9t-jS5JA,UCjZL1_t_U0zfIwHKyWY8NTw,UC-nf2NPnA3RXOZcw0KBmGfA,UCETuQf4lzTrfevoHdSGo8Ew,UCBbTnorwzva0ZIMGW0ttwVA" ) {
                 goAppleCast("https://anchor.fm/s/10ba5be30/podcast/rss");
                 return;
             }
-            if ( cyParam == "UCNAqBC6Z1HkymQ7gkG0pCOg,UCnixWoic7ATGI0AZ2LrtJ7Q,UCrZG5sGryxwgSDQSlHgmZTw,UCm5oNp5xqr4CdtU9L7ZrsKg,UCqhS6bcbMX5AtiM9dedFiYQ,UC8u_Mgs-48ZdtP67b4CYfewi,UCZXZcgbA7iajsWdPsAzJ40A" ) {
+            if ( cysParam == "UCNAqBC6Z1HkymQ7gkG0pCOg,UCnixWoic7ATGI0AZ2LrtJ7Q,UCrZG5sGryxwgSDQSlHgmZTw,UCm5oNp5xqr4CdtU9L7ZrsKg,UCqhS6bcbMX5AtiM9dedFiYQ,UC8u_Mgs-48ZdtP67b4CYfewi,UCZXZcgbA7iajsWdPsAzJ40A" ) {
                 goAppleCast("https://anchor.fm/s/74afc188/podcast/rss,https://www.ic975.com/feed/creativecaptain/");
                 return;
             }
