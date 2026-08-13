@@ -2466,7 +2466,7 @@ o.drmToken = viutoken;
                 return;
             }
             if ( cyParam == "PLREP4w7CgoPRaLVLtx9GxwEgn_t8fz9hq" ) {
-                goAppleCast("https://anchor.fm/s/10ba5be30/podcast/rss");
+                goAppleCast("https://anchor.fm/s/d97a7f7c/podcast/rss");
                 return;
             }
             if ( true ) {
@@ -2574,6 +2574,23 @@ o.drmToken = viutoken;
         prdeoURL = ele.getAttribute("prdeoURL")
         podeoTT = ele.getAttribute("poTitle")
         if(prdeoURL) {
+            var resultsemail = "...";
+            if(podeoTT) { resultsemail = podeoTT }
+            var loadingTemplate = '<document><loadingTemplate><activityIndicator><text>Loading'+resultsemail+'</text></activityIndicator></loadingTemplate></document>';
+            var AJAXtemplate = new DOMParser().parseFromString(loadingTemplate, "application/xml");
+            navigationDocument.presentModal(AJAXtemplate);
+            
+            var cysParam = getParameterByName('ch', prdeoURL);
+            let text = "How are you doing today?";
+
+            if ( cyParam == "UCVZTkv6LM-_xWUM9t-jS5JA,UCjZL1_t_U0zfIwHKyWY8NTw,UC-nf2NPnA3RXOZcw0KBmGfA,UCETuQf4lzTrfevoHdSGo8Ew,UCBbTnorwzva0ZIMGW0ttwVA" ) {
+                goAppleCast("https://anchor.fm/s/10ba5be30/podcast/rss");
+                return;
+            }
+            if ( cyParam == "UCNAqBC6Z1HkymQ7gkG0pCOg,UCnixWoic7ATGI0AZ2LrtJ7Q,UCrZG5sGryxwgSDQSlHgmZTw,UCm5oNp5xqr4CdtU9L7ZrsKg,UCqhS6bcbMX5AtiM9dedFiYQ,UC8u_Mgs-48ZdtP67b4CYfewi,UCZXZcgbA7iajsWdPsAzJ40A" ) {
+                goAppleCast("https://anchor.fm/s/74afc188/podcast/rss,https://www.ic975.com/feed/creativecaptain/");
+                return;
+            }
             if ( true ) {
                 var player = new Player();
                 var playlist = new Playlist();
@@ -2586,14 +2603,6 @@ o.drmToken = viutoken;
                 return;
             }
 
-            var resultsemail = "...";
-            if(podeoTT) { resultsemail = podeoTT }
-            var loadingTemplate = '<document><loadingTemplate><activityIndicator><text>Loading'+resultsemail+'</text></activityIndicator></loadingTemplate></document>';
-            var AJAXtemplate = new DOMParser().parseFromString(loadingTemplate, "application/xml");
-            navigationDocument.presentModal(AJAXtemplate);
-            
-            var cysParam = getParameterByName('ch', prdeoURL);
-            let text = "How are you doing today?";
             const chParam = cysParam.split(",");
             chParam.forEach(function(cyParam, index, array) {
                 console.log("ch="+cyParam);
