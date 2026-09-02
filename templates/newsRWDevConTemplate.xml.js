@@ -28,7 +28,7 @@ var Template = function() { return `<?xml version="1.0" encoding="UTF-8" ?>
 	<title>BBC</title>
 	</menuItem>
 	<menuItem videoURL="https://netleave.appspot.com/cnnnewsplayer">
-	<title>sky</title>
+	<title>SKY</title>
 	</menuItem>
 	<menuItem videoURL="https://www.bloomberg.com/media-manifest/streams/us.m3u8">
 	<title>BLOOMBERG</title>
